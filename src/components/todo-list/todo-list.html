@@ -1,13 +1,13 @@
 <!-- Generated template for the TodoListComponent component -->
 <div>
-  <ion-list>
-	<ion-item *ngFor='let item of items'>
-		{{ item.name }} - Completed : {{ isCompleteCount(item.items) }}
-		<ion-list>
+  <ion-list *ngFor='let list of items' >
+	<button ion-item (click)="pushPage(list)" >
+		{{ list.name }} - Completed : {{ isCompleteCount(list.items)}}
+		<!--<ion-list>
 			<ion-item *ngFor='let todo of item.items'>
 				<todo-item [todo]='todo'></todo-item>
 			</ion-item>
-		</ion-list>
-	</ion-item>
+		</ion-list>-->
+	</button>
   </ion-list>
 </div>

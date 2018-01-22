@@ -13,12 +13,11 @@ import { TodoItem } from '../../model/todo-item.model';
 })
 export class TodoItemComponent {
 
-  @Input() 
+  @Input()
   public todo: TodoItem;
 
   constructor() {
     console.log('Hello TodoItemComponent Component');
-    this.text = 'Hello World';
   }
 
 }
