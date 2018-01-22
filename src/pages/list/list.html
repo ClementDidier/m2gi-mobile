@@ -19,7 +19,7 @@
     <ion-list>
         <ion-item-sliding *ngFor='let todo of list.items'>
             <ion-item><todo-item [todo]='todo'></todo-item></ion-item>
-            <ion-item-options side='left'><ion-button (click)='deleteItem()'></ion-button></ion-item-options>
+            <ion-item-options side='left'><button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger"><ion-icon name="close"> delete</ion-icon></button></ion-item-options>
         </ion-item-sliding>
     </ion-list>
 

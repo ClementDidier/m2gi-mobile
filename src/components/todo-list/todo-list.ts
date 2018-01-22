@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TodoProvider } from '../../providers/todo/todo';
 import { TodoItem } from '../../model/todo-item.model';
@@ -20,7 +20,7 @@ export class TodoListComponent {
   subscriber: Observable<TodoList[]>;
   items: TodoList[];
 
-  constructor(@Inject(TodoProvider) todoService: TodoProvider, public navCtrl: NavController) {
+  constructor(public todoService: TodoProvider, public navCtrl: NavController) {
     this.subscriber = todoService.getList();
     this.subscriber.subscribe(items => this.items = items);
   }
@@ -35,5 +35,8 @@ export class TodoListComponent {
         id: list.uuid,
       });
 
+  }
+  public deleteList(listuuid : string){
+    this.todoService.deleteList(listuuid);
   }
 }

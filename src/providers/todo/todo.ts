@@ -84,4 +84,11 @@ export class TodoProvider {
       items.splice(index,1);
     }
   }
+  public deleteList(listUuid: String) {
+    let list = this.data.find(d => d.uuid == listUuid);
+    let index = this.data.findIndex(value => value.uuid == listUuid);
+    if (index != -1) {
+      this.data.splice(index,1);
+    }
+  }
 }

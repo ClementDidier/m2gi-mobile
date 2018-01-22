@@ -32,7 +32,7 @@ export class ListPage {
         console.log('ionViewDidLoad ListPage');
     }
 
-    deleteItem() {
-        console.log('');
+    deleteItem(listid : string, todoid : string) {
+        this.todoService.deleteTodo(listid,todoid);
     }
 }
