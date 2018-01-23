@@ -12,6 +12,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoProvider } from '../providers/todo/todo';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TodoProvider } from '../providers/todo/todo';
   imports: [
     BrowserModule,
 	ComponentsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +42,8 @@ import { TodoProvider } from '../providers/todo/todo';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoProvider
+    TodoProvider,
+    TranslateService
   ]
 })
 export class AppModule {}

@@ -1,12 +1,9 @@
 <!-- Generated template for the TodoListComponent component -->
-<div>
-  <ion-list>
+<ion-list>
     <ion-item-sliding *ngFor='let list of items'>
-        <ion-item><button ion-item (click)="pushPage(list)" >
-      		{{ list.name }} - Completed : {{ isCompleteCount(list.items)}}
-
-      	</button></ion-item>
+        <button ion-item (click)="pushPage(list)" >
+            {{ list.name }} - Completed : {{ isCompleteCount(list.items)}} / {{ list.items.length }}
+        </button>
         <ion-item-options side='left'><button ion-button (click)='deleteList(list.uuid)' color="danger"><ion-icon name="close">delete</ion-icon></button></ion-item-options>
     </ion-item-sliding>
-  </ion-list>
-</div>
+</ion-list>
