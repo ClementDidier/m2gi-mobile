@@ -1,11 +1,9 @@
-<div>
-  <ion-grid>
-    <ion-row>
-      <ion-col><ion-checkbox item-left></ion-checkbox></ion-col>
-      <ion-col col-auto>
-        <h2>{{ todo.name }}</h2>
-        <p *ngIf="todo.desc">Description : {{ todo.desc }}</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</div>
+<ion-grid>
+  <ion-row>
+    <ion-checkbox item-left></ion-checkbox>
+    <ion-col>
+      <h2>{{ todo.name }}</h2>
+      <p *ngIf="todo.desc">Description : {{ todo.desc }}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
