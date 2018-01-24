@@ -34,10 +34,11 @@ export class TodoListComponent {
     public pushPage(list : TodoList){
         this.navCtrl.push(ListPage,{
             id: list.uuid,
+            name : list.name,
         });
 
     }
-    
+
     public deleteList(listuuid : string) {
         this.confirmListDeletion(listuuid);
     }
@@ -51,7 +52,6 @@ export class TodoListComponent {
                     text: 'Annuler',
                     role: 'cancel',
                     handler: () => {
-                        console.log('Cancel clicked');
                     }
                 },
                 {
@@ -63,5 +63,60 @@ export class TodoListComponent {
             ]
         });
         alert.present();
+    }
+    private addList(){
+      let alert = this.alertCtrl.create({
+          title: 'Ajouter une liste',
+          message: 'Entrez un nom pour cette liste :',
+          inputs: [
+          {
+            name: 'listname',
+            placeholder: 'List name'
+          },
+        ] ,
+          buttons: [
+              {
+                  text: 'Annuler',
+                  role: 'cancel',
+                  handler: () => {
+                  }
+              },
+              {
+                  text: 'Valider',
+                  handler: data  => {
+                      this.todoService.addList(data.listname,);
+                  }
+              }
+          ]
+      });
+      alert.present();
+    }
+    private editList(list : TodoList){
+      let alert = this.alertCtrl.create({
+          title: 'Editer une liste',
+          message: 'Entrez un autre nom pour cette liste :',
+          inputs: [
+          {
+            name: 'listname',
+            placeholder: 'List name',
+            value : list.name
+          },
+        ] ,
+          buttons: [
+              {
+                  text: 'Annuler',
+                  role: 'cancel',
+                  handler: () => {
+                  }
+              },
+              {
+                  text: 'Valider',
+                  handler: data  => {
+                      this.todoService.editList(list.uuid,data.listname,);
+                  }
+              }
+          ]
+      });
+      alert.present();
     }
 }

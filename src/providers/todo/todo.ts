@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import {TodoItem} from "../../model/todo-item.model";
 import {TodoList} from "../../model/todo-list.model";
 import {Observable} from "rxjs/Observable";
+import {v4 as uuid} from 'uuid';
 import 'rxjs/Rx';
 
 /*
@@ -76,6 +77,13 @@ export class TodoProvider {
     let index = items.findIndex(value => value.uuid == editedItem.uuid);
     items[index] = editedItem;
   }
+  public editList(listUuid : String,listName : String){
+    let list = this.data.find(d => d.uuid == listUuid);
+    let index = this.data.findIndex(value => value.uuid == listUuid);
+    if (index != -1) {
+      this.data[index].name = listName.toString();
+    }
+  }
 
   public deleteTodo(listUuid: String, uuid: String) {
     let items = this.data.find(d => d.uuid == listUuid).items;
@@ -91,4 +99,22 @@ export class TodoProvider {
       this.data.splice(index,1);
     }
   }
+  public addList(name: String) {
+    this.data.push({    uuid : uuid(),
+        name : name.toString(),
+        items : []})
+  }
+  public addTodo(listUuid: String,itemName : String, completed : boolean, description : String) {
+    let list = this.data.find(d => d.uuid == listUuid);
+    let index = this.data.findIndex(value => value.uuid == listUuid);
+    if (index != -1) {
+      this.data[index].items.push({    uuid : uuid(),
+          name : itemName.toString(),
+          complete : completed,
+          desc : description.toString(),
+        })
+    }
+
+  }
+
 }

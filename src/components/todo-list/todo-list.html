@@ -4,6 +4,12 @@
         <button ion-item (click)="pushPage(list)" >
             {{ list.name }} - Completed : {{ isCompleteCount(list.items)}} / {{ list.items.length }}
         </button>
-        <ion-item-options side='left'><button ion-button (click)='deleteList(list.uuid)' color="danger"><ion-icon name="close">delete</ion-icon></button></ion-item-options>
+        <ion-item-options side='left'><button ion-button (click)='deleteList(list.uuid)' color="danger"><ion-icon name="close">Delete</ion-icon></button>
+        <button ion-button (click)='editList(list)' color="secondary">
+            <ion-icon name="pricetag"> Edit</ion-icon>
+        </button>
+        </ion-item-options>
     </ion-item-sliding>
 </ion-list>
+
+<button ion-button round (click)='addList()'><ion-icon name="add">Ajouter</ion-icon></button>
