@@ -27,6 +27,7 @@ export class TodoProvider {
         {
           uuid : "20c09bdd-1cf8-43b0-9111-977fc4d343bc",
           name : "Item 1-2",
+          desc : "This is the description of the 1-2 item",
           complete : false
         },
         {
