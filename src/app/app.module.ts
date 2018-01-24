@@ -9,10 +9,15 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoProvider } from '../providers/todo/todo';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseCredentials } from '../firebase.credentials';
 
 @NgModule({
   declarations: [
@@ -21,13 +26,16 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ContactPage,
     HomePage,
     TabsPage,
-    ListPage
+    ListPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
-	ComponentsModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    AngularFireModule.initializeApp(FirebaseCredentials),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +44,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ContactPage,
     HomePage,
     TabsPage,
-    ListPage
+    ListPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
