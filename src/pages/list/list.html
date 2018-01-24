@@ -21,13 +21,14 @@ Ionic pages and navigation.
             </ion-item>
             <ion-item-options side='left'>
                 <button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger">
-                    <ion-icon name="close"> Delete</ion-icon>
+                    <ion-icon name="close"></ion-icon>Delete
                 </button>
                 <button ion-button (click)='editItem(todo)' color="secondary">
-                    <ion-icon name="pricetag"> Edit</ion-icon>
+                    <ion-icon name="pricetag"></ion-icon>Edit
                 </button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
     <button ion-button round (click)='addItem()'><ion-icon name="add-circle">Ajouter</ion-icon></button>
+
 </ion-content>
