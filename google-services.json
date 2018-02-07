@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "554302347766",
+    "firebase_url": "https://m2gi-mobile.firebaseio.com",
+    "project_id": "m2gi-mobile",
+    "storage_bucket": "m2gi-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554302347766:android:764d2cb7da3280eb",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554302347766-p7rm12qcts88kh68c4eleevl29j0i6jc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter",
+            "certificate_hash": "a92df4fa4f8f1f3e0394cba3913e3f1f768203ad"
+          }
+        },
+        {
+          "client_id": "554302347766-piur8evatklop98tg3e2nv4bkh50d26d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEOfxrEzgnvUjXkOp54BcTUIh8zT_MSys"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554302347766-piur8evatklop98tg3e2nv4bkh50d26d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
