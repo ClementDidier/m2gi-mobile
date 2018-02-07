@@ -5,10 +5,8 @@ import { TodoListComponent } from './todo-list/todo-list';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-	declarations: [TodoItemComponent,
-    TodoListComponent],
-	imports: [IonicModule, TranslateModule],
-	exports: [TodoItemComponent,
-    TodoListComponent]
+	declarations: [TodoItemComponent, TodoListComponent],
+	imports: [IonicModule, TranslateModule.forChild()],
+	exports: [TodoItemComponent, TodoListComponent]
 })
 export class ComponentsModule {}

@@ -13,7 +13,8 @@ import { LoginPage } from '../pages/login/login';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoProvider } from '../providers/todo/todo';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -22,41 +23,48 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    ListPage,
-    LoginPage
-  ],
-  imports: [
-    BrowserModule,
-    ComponentsModule,
-    IonicModule.forRoot(MyApp),
-    TranslateModule.forRoot(),
-    AngularFireModule.initializeApp(FirebaseCredentials),
-    AngularFireAuthModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    ListPage,
-    LoginPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoProvider,
-    TranslateService,
-    GooglePlus,
-    AlertController
-  ]
+    declarations: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage,
+        ListPage,
+        LoginPage
+    ],
+    imports: [
+        BrowserModule,
+        ComponentsModule,
+        IonicModule.forRoot(MyApp),
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (MyApp.createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        AngularFireModule.initializeApp(FirebaseCredentials),
+        AngularFireAuthModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage,
+        ListPage,
+        LoginPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        TodoProvider,
+        GooglePlus,
+        AlertController
+    ]
 })
+
 export class AppModule {}

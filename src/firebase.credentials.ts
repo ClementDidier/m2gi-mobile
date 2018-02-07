@@ -4,5 +4,6 @@ export const FirebaseCredentials = {
   databaseURL: "https://m2gi-mobile.firebaseio.com",
   projectId: "m2gi-mobile",
   storageBucket: "m2gi-mobile.appspot.com",
-  messagingSenderId: "554302347766"
+  messagingSenderId: "554302347766",
+  webClientId: "554302347766-piur8evatklop98tg3e2nv4bkh50d26d.apps.googleusercontent.com"
 };
