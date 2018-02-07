@@ -18,6 +18,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseCredentials } from '../firebase.credentials';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FirebaseCredentials } from '../firebase.credentials';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoProvider,
-    TranslateService
+    TranslateService,
+    GooglePlus
   ]
 })
 export class AppModule {}
