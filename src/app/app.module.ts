@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseCredentials } from '../firebase.credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AlertController } from 'ionic-angular';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoProvider,
     TranslateService,
-    GooglePlus
+    GooglePlus,
+    AlertController
   ]
 })
 export class AppModule {}
