@@ -1,3 +1,19 @@
 page-login {
+  .app-icon {
+      background-color: #fff;
+      background: url('../../assets/imgs/app-logo.png') center;
+      background-size: cover;
+      border-radius: 50%;
+      height: 125px;
+      margin: 0 auto;
+      width: 125px;
+  }
+  .login-header h1{
+    text-align: center;
+    color: white;
+  }
+  button{
+    width: 100%;
+  }
 
 }
