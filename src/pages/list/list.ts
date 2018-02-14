@@ -18,7 +18,8 @@ import { TodoProvider } from '../../providers/todo/todo';
     templateUrl: 'list.html',
 })
 export class ListPage {
-    list: TodoList;
+    
+    private list: TodoList;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoProvider, private alertCtrl: AlertController) {
         var uuid = this.navParams.get('id');
@@ -41,7 +42,7 @@ export class ListPage {
     }
 
     private confirmItemDeletion(listId, todoId) {
-        let alert = this.alertCtrl.create({
+        this.alertCtrl.create({
             title: 'Confirmation de suppression',
             message: "Êtes-vous sûr de supprimer l'élément ?",
             buttons: [
@@ -59,82 +60,73 @@ export class ListPage {
                     }
                 }
             ]
-        });
-        alert.present();
+        }).present();
     }
-    private addItem(){
-      let alert = this.alertCtrl.create({
-          title: 'Ajouter un item',
-          message: 'Entrez les informations sur l\élement à ajouter à la liste ' + this.list.name + '.',
-          inputs: [
-          {
-            name: 'name',
-            placeholder: 'Item name'
-          },
-          {
-            name: 'desc',
-            placeholder: 'Item description'
-          },
-          {
-            name: 'completed',
-            type: 'checkbox',
-            label: 'Is completed ?'
-          },
-        ] ,
-          buttons: [
-              {
-                  text: 'Annuler',
-                  role: 'cancel',
-                  handler: () => {
-                  }
-              },
-              {
-                  text: 'Valider',
-                  handler: data  => {
-                      this.todoService.addTodo(this.list.uuid, data.name, data.completed, data.desc);
-                  }
-              }
-          ]
-      });
-      alert.present();
+    private addItem() {
+        this.alertCtrl.create({
+            title: 'Ajouter un item',
+            message: 'Entrez les informations sur l\élement à ajouter à la liste ' + this.list.name + '.',
+            inputs: [
+                {
+                    name: 'name',
+                    placeholder: 'Item name'
+                },
+                {
+                    name: 'desc',
+                    placeholder: 'Item description'
+                },
+                {
+                    name: 'completed',
+                    type: 'checkbox',
+                    label: 'Is completed ?'
+                },
+            ] ,
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Valider',
+                    handler: data => {
+                        this.todoService.addTodo(this.list.uuid, data.name, data.completed, data.desc);
+                    }
+                }
+            ]
+        }).present();
     }
-    private editItem(item : TodoItem){
-      let alert = this.alertCtrl.create({
-          title: 'Modifier un item',
-          message: 'Entrez les informations sur l\élement à modifier de la liste ' + this.list.name + '.',
-          inputs: [
-          {
-            name: 'name',
-            //placeholder: 'Item name',
-            value : item.name
-          },
-          {
-            name: 'desc',
-            //placeholder: 'Item description',
-            value : item.desc || ""
-          },
-          {
-            name: 'completed',
-            label: 'Is completed ?',
-            type: 'checkbox',
-            checked : item.complete
-          }
-        ] ,
-          buttons: [
-              {
-                  text: 'Annuler',
-                  role: 'cancel',
-                  handler: () => {
-                  }
-              },
-              {
-                  text: 'Valider',
-                  handler: data  => {
-                      this.todoService.editTodo(this.list.uuid, {uuid : item.uuid, name: data.name, desc : data.desc, complete : data.completed});
-                  }
-              }
-          ]
-      });
-      alert.present();
+    private editItem(item : TodoItem) {
+        this.alertCtrl.create({
+            title: 'Modifier un item',
+            message: 'Entrez les informations sur l\élement à modifier de la liste ' + this.list.name + '.',
+            inputs: [
+                {
+                    name: 'name',
+                    value : item.name
+                },
+                {
+                    name: 'desc',
+                    value : item.desc || ""
+                },
+                {
+                    name: 'completed',
+                    label: 'Is completed ?',
+                    type: 'checkbox',
+                    checked : item.complete
+                }
+            ] ,
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Valider',
+                    handler: (data) => {
+                        this.todoService.editTodo(this.list.uuid, {uuid : item.uuid, name: data.name, desc : data.desc, complete : data.completed });
+                    }
+                }
+            ]
+        }).present();
     }
 }

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
 import { GooglePlus } from '@ionic-native/google-plus';
-import FirebaseGooglePlus from 'firebase';
+import * as FirebaseGooglePlus from 'firebase';
 import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +27,7 @@ export class LoginPage {
     private userProfile: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private firebase: AngularFireAuth, private googlePlus: GooglePlus, private alert: AlertController) {
-        /*FirebaseGooglePlus.auth().onAuthStateChanged((user) => {
+        FirebaseGooglePlus.auth().onAuthStateChanged(user => {
             if (user) {
                 this.alert.create({
                     title: 'Connection',
@@ -38,7 +38,7 @@ export class LoginPage {
             } else {
                 this.userProfile = null;
             }
-        });*/
+        });
     }
 
     public ionViewDidLoad(): void {
