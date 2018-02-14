@@ -6,17 +6,6 @@ L'application réalisée permet également de se lier à un compte GooglePlus af
 - ABELLO Stephen
 - DIDIER Clément
 
-## Debug de l'application
-Il est possible de visualiser l'interface et quelques fonctionnalités depuis le lab de ionic sur navigateur avec la commande suivante :
-```sh
-ionic serve -l
-```
-
-Il est également possible de debug l'application sur une emulation Android ou un appareil compatible avec la commande qui suit. Cette commande permet d'obtenir les valeurs en sorties standards.
-```sh
-ionic run android -l -c -s --debug
-```
-
 ## Compilation de l'application
 L'application est implémenté uniquement pour tourner sur le système d'exploitation Android. Elle a été testé en version **API 27**.
 ```sh
@@ -24,8 +13,14 @@ ionic cordova build android
 ```
 
 ## Execution de l'application
+Execution sur emulateur ou appareil Android (toutes les fonctionnalités) :
 ```sh
 ionic cordova run android
+```
+
+Execution sur navigateur (une partie des fonctionnalités) :
+```sh
+ionic cordova run browser
 ```
 
 ## Fonctionnalités
