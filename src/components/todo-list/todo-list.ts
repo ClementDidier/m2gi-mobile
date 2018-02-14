@@ -17,8 +17,8 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 export class TodoListComponent {
 
-    subscriber: Observable<TodoList[]>;
-    items: TodoList[];
+    private subscriber: Observable<TodoList[]>;
+    private items: TodoList[];
 
     constructor(public todoService: TodoProvider, public navCtrl: NavController, private alertCtrl: AlertController) {
         this.subscriber = todoService.getList();
@@ -27,16 +27,18 @@ export class TodoListComponent {
 
     public isCompleteCount(items : TodoItem[]) {
         let result = 0;
-        items.forEach(i => { if(i.complete) result++});
+        items.forEach((i) => {
+            if (i.complete)
+                result++;
+        });
         return result;
     }
 
-    public pushPage(list : TodoList){
-        this.navCtrl.push(ListPage,{
-            id: list.uuid,
+    public pushPage(list : TodoList) {
+        this.navCtrl.push(ListPage, {
+            id : list.uuid,
             name : list.name,
         });
-
     }
 
     public deleteList(listuuid : string) {
@@ -50,9 +52,7 @@ export class TodoListComponent {
             buttons: [
                 {
                     text: 'Annuler',
-                    role: 'cancel',
-                    handler: () => {
-                    }
+                    role: 'cancel'
                 },
                 {
                     text: 'Valider',
@@ -64,59 +64,54 @@ export class TodoListComponent {
         });
         alert.present();
     }
-    private addList(){
-      let alert = this.alertCtrl.create({
-          title: 'Ajouter une liste',
-          message: 'Entrez un nom pour cette liste :',
-          inputs: [
-          {
-            name: 'listname',
-            placeholder: 'List name'
-          },
-        ] ,
-          buttons: [
-              {
-                  text: 'Annuler',
-                  role: 'cancel',
-                  handler: () => {
-                  }
-              },
-              {
-                  text: 'Valider',
-                  handler: data  => {
-                      this.todoService.addList(data.listname,);
-                  }
-              }
-          ]
-      });
-      alert.present();
+
+    private addList() {
+        this.alertCtrl.create({
+            title: 'Ajouter une liste',
+            message: 'Entrez un nom pour cette liste :',
+            inputs: [
+                {
+                    name: 'listname',
+                    placeholder: 'List name'
+                },
+            ] ,
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                },
+                {
+                    text: 'Valider',
+                    handler: (data) => {
+                        this.todoService.addList(data.listname);
+                    }
+                }
+            ]
+        }).present();
     }
-    private editList(list : TodoList){
-      let alert = this.alertCtrl.create({
-          title: 'Editer une liste',
-          message: 'Entrez un autre nom pour cette liste :',
-          inputs: [
-          {
-            name: 'listname',
-            placeholder: 'List name',
-            value : list.name
-          },
-        ] ,
-          buttons: [
-              {
-                  text: 'Annuler',
-                  role: 'cancel',
-                  handler: () => {
-                  }
-              },
-              {
-                  text: 'Valider',
-                  handler: data  => {
-                      this.todoService.editList(list.uuid,data.listname,);
-                  }
-              }
-          ]
-      });
-      alert.present();
+    private editList(list : TodoList) {
+        this.alertCtrl.create({
+            title: 'Editer une liste',
+            message: 'Entrez un autre nom pour cette liste :',
+            inputs: [
+                {
+                    name: 'listname',
+                    placeholder: 'List name',
+                    value : list.name
+                },
+            ] ,
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Valider',
+                    handler: (data) => {
+                        this.todoService.editList(list.uuid, data.listname);
+                    }
+                }
+            ]
+        }).present();
     }
 }
