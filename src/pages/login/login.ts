@@ -3,9 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
 import { GooglePlus } from '@ionic-native/google-plus';
-import * as FirebaseGooglePlus from 'firebase';
+import * as firebase from 'firebase/app';
 import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AlertController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
 
 /**
@@ -24,21 +25,10 @@ export class LoginPage {
 
     private email: string;
     private password: string;
-    private userProfile: any;
+    private userProfile: Observable<firebase.User>;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private firebase: AngularFireAuth, private googlePlus: GooglePlus, private alert: AlertController) {
-        FirebaseGooglePlus.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.alert.create({
-                    title: 'Connection',
-                    subTitle: translate.instant('googleplus-connexion-success-message'),
-                    buttons: ['Have fun']
-                }).present();
-                this.userProfile = user;
-            } else {
-                this.userProfile = null;
-            }
-        });
+        this.userProfile = firebase.authState;
     }
 
     public ionViewDidLoad(): void {
@@ -49,13 +39,13 @@ export class LoginPage {
         this.googlePlus.login({
             webClientId: FIREBASE_CREDENTIALS.webClientId,
             offline: true
-        }).then((res) => {
+        }).then(res => {
             this.alert.create({
                 title: 'Connection',
                 subTitle: this.translate.instant('googleplus-connexion-success-message'),
                 buttons: ['Have fun']
             }).present();
-        }).catch((err) => {
+        }).catch(err => {
             this.alert.create({
                 title: 'Erreur de connection',
                 subTitle: this.translate.instant('googleplus-connexion-failed-message') + '\nMessage : ' + err,

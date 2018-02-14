@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, IonicModule, AlertController } from 'ionic-angular';
 import { TodoList } from '../../model/todo-list.model';
 import { TodoItem } from '../../model/todo-item.model';
-
+import { LoginPage } from '../login/login';
 import { TodoProvider } from '../../providers/todo/todo';
 
 /**
@@ -18,7 +18,7 @@ import { TodoProvider } from '../../providers/todo/todo';
     templateUrl: 'list.html',
 })
 export class ListPage {
-    
+
     private list: TodoList;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoProvider, private alertCtrl: AlertController) {
@@ -35,6 +35,7 @@ export class ListPage {
 
     private ionViewDidLoad() {
         console.log('ionViewDidLoad ListPage');
+        this.navCtrl.setRoot(LoginPage);
     }
 
     public deleteItem(listid : string, todoid : string) {
