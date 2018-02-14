@@ -14,11 +14,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoProvider } from '../providers/todo/todo';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FirebaseCredentials } from '../firebase.credentials';
+import { FIREBASE_CREDENTIALS } from '../firebase.credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
 
@@ -44,7 +44,7 @@ import { AlertController } from 'ionic-angular';
                 deps: [HttpClient]
             }
         }),
-        AngularFireModule.initializeApp(FirebaseCredentials),
+        AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
         AngularFireAuthModule
     ],
     bootstrap: [IonicApp],
@@ -60,7 +60,7 @@ import { AlertController } from 'ionic-angular';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
         TodoProvider,
         GooglePlus,
         AlertController

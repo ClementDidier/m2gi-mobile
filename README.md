@@ -13,8 +13,14 @@ ionic cordova build android
 ```
 
 ## Execution de l'application
+Execution sur emulateur ou appareil Android (toutes les fonctionnalités) :
 ```sh
 ionic cordova run android
+```
+
+Execution sur navigateur (une partie des fonctionnalités) :
+```sh
+ionic cordova run browser
 ```
 
 ## Fonctionnalités

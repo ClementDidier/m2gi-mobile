@@ -2,6 +2,7 @@
     "googleplus-connexion-button-caption" : "CONNECTION GOOGLE",
     "googleplus-connexion-success-message" : "Connecté au service GooglePlus avec succés !",
     "googleplus-connexion-failed-message" : "Une erreur est survenue lors de la tentative de connection.",
+    "sample-connexion-button-caption" : "CONNECTION SIMPLE",
     "sample-connexion-success-message" : "Connecté avec succés à l'application ionic-todo !",
     "sample-connexion-failed-message" : "Une erreur est survenue lors de la tentative de connection au serveur ionic-todo."
 }

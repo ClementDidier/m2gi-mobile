@@ -5,15 +5,15 @@ import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
 
 @Component({
-  templateUrl: 'tabs.html'
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = LoginPage;
-  tab2Root = HomePage;
-  tab3Root = AboutPage;
+    private tab1Root = LoginPage;
+    private tab2Root = HomePage;
+    private tab3Root = AboutPage;
 
-  constructor() {
+    constructor() {
 
-  }
+    }
 }

@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
 import { GooglePlus } from '@ionic-native/google-plus';
 import FirebaseGooglePlus from 'firebase';
-import { FirebaseCredentials } from '../../firebase.credentials';
+import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,8 +27,8 @@ export class LoginPage {
     private userProfile: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private firebase: AngularFireAuth, private googlePlus: GooglePlus, private alert: AlertController) {
-        FirebaseGooglePlus.auth().onAuthStateChanged(user => {
-            if(user) {
+        /*FirebaseGooglePlus.auth().onAuthStateChanged((user) => {
+            if (user) {
                 this.alert.create({
                     title: 'Connection',
                     subTitle: translate.instant('googleplus-connexion-success-message'),
@@ -38,24 +38,24 @@ export class LoginPage {
             } else {
                 this.userProfile = null;
             }
-        });
+        });*/
     }
 
-    ionViewDidLoad() {
+    public ionViewDidLoad(): void {
         console.log('ionViewDidLoad LoginPage');
     }
 
-    loginGooglePlus(): void {
+    public loginGooglePlus(): void {
         this.googlePlus.login({
-            'webClientId': FirebaseCredentials.webClientId,
-            'offline': true
-        }).then(res => {
+            webClientId: FIREBASE_CREDENTIALS.webClientId,
+            offline: true
+        }).then((res) => {
             this.alert.create({
                 title: 'Connection',
                 subTitle: this.translate.instant('googleplus-connexion-success-message'),
                 buttons: ['Have fun']
             }).present();
-        }).catch(err => {
+        }).catch((err) => {
             this.alert.create({
                 title: 'Erreur de connection',
                 subTitle: this.translate.instant('googleplus-connexion-failed-message') + '\nMessage : ' + err,
@@ -64,10 +64,10 @@ export class LoginPage {
         });
     }
 
-    async loginSample() {
-        try {
-            const result = await this.firebase.auth.signInWithEmailAndPassword(this.email, this.password);
-            if(result) {
+    public loginSample(): void {
+        this.firebase.auth.signInWithEmailAndPassword(this.email, this.password).then((result) => {
+            // si connection réalisée avec succés
+            if (result) {
                 this.alert.create({
                     title: 'Connection',
                     subTitle: this.translate.instant('sample-connexion-success-message'),
@@ -75,13 +75,12 @@ export class LoginPage {
                 }).present();
                 this.navCtrl.setRoot(HomePage);
             }
-        }
-        catch(e) {
+        }).catch((error) => {
             this.alert.create({
                 title: 'Erreur de connection',
-                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + e,
+                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + error,
                 buttons: ['OK']
             }).present();
-        }
+        });
     }
 }
