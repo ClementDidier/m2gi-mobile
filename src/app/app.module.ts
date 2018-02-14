@@ -15,12 +15,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoProvider } from '../providers/todo/todo';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CREDENTIALS } from '../firebase.credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
+import { LoggerProvider } from '../providers/logger/logger';
 
 @NgModule({
     declarations: [
@@ -63,7 +63,8 @@ import { AlertController } from 'ionic-angular';
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         TodoProvider,
         GooglePlus,
-        AlertController
+        AlertController,
+        LoggerProvider
     ]
 })
 

@@ -15,28 +15,41 @@ Ionic pages and navigation.
       <div class="app-icon"></div>
       <h1>IonicTodos</h1>
     </div>
-    <ion-card>
-        <ion-card-content>
-            <ion-item>
-                <ion-label floating>Adresse email</ion-label>
-                <ion-input highlight-color="balanced" type="text" [(ngModel)]="email"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Mot de passe</ion-label>
-                <ion-input type="password" [(ngModel)]="password"></ion-input>
-            </ion-item>
-            <button ion-button (click)="loginSample()" icon-start>
-                <ion-icon name="at"></ion-icon>
-                {{ 'sample-connexion-button-caption' | translate }}
-            </button>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-content>
-            <button ion-button (click)="loginGooglePlus()" color="danger" icon-start>
-                <ion-icon name="logo-googleplus"></ion-icon>
-                {{ 'googleplus-connexion-button-caption' | translate }}
-            </button>
-        </ion-card-content>
-    </ion-card>
+    <div *ngIf="!logger.isLogged()">
+        <ion-card>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label floating>Adresse email</ion-label>
+                    <ion-input highlight-color="balanced" type="text" [(ngModel)]="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Mot de passe</ion-label>
+                    <ion-input type="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+                <button ion-button (click)="loginSample()" icon-start>
+                    <ion-icon name="at"></ion-icon>
+                    {{ 'sample-connexion-button-caption' | translate }}
+                </button>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-content>
+                <button ion-button (click)="loginGooglePlus()" color="danger" icon-start>
+                    <ion-icon name="logo-googleplus"></ion-icon>
+                    {{ 'googleplus-connexion-button-caption' | translate }}
+                </button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+    <div *ngIf="logger.isLogged()">
+        <ion-card>
+            <ion-card-content>
+                Bonjour {{ logger.displayName }}
+                <button ion-button (click)="logOut()" color="danger" icon-start>
+                    <ion-icon name="log-out"></ion-icon>
+                    {{ 'disconnection-button-caption' | translate }}
+                </button>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>
