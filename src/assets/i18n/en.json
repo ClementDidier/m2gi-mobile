@@ -4,5 +4,6 @@
     "googleplus-connexion-failed-message" : "An error occured while service trying to connect.",
     "sample-connexion-button-caption" : "SIMPLE CONNEXION",
     "sample-connexion-success-message" : "Connected successfully to ionic-todo application !",
-    "sample-connexion-failed-message" : "An error occured while service trying to connect to ionic-todo server."
+    "sample-connexion-failed-message" : "An error occured while service trying to connect to ionic-todo server.",
+    "disconnection-button-caption" : "DISCONNECT"
 }

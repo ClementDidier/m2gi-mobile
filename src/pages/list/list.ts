@@ -4,6 +4,7 @@ import { TodoList } from '../../model/todo-list.model';
 import { TodoItem } from '../../model/todo-item.model';
 import { LoginPage } from '../login/login';
 import { TodoProvider } from '../../providers/todo/todo';
+import { LoggerProvider } from '../../providers/logger/logger';
 
 /**
 * Generated class for the ListPage page.
@@ -21,7 +22,7 @@ export class ListPage {
 
     private list: TodoList;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoProvider, private alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoProvider, private logger: LoggerProvider, private alertCtrl: AlertController) {
         var uuid = this.navParams.get('id');
         var name = this.navParams.get('name');
 
@@ -35,7 +36,13 @@ export class ListPage {
 
     private ionViewDidLoad() {
         console.log('ionViewDidLoad ListPage');
-        this.navCtrl.setRoot(LoginPage);
+        if (!this.logger.isLogged())
+            this.navCtrl.setRoot(LoginPage);
+    }
+
+    private ionViewWillEnter() {
+        if (!this.logger.isLogged())
+            this.navCtrl.setRoot(LoginPage);
     }
 
     public deleteItem(listid : string, todoid : string) {

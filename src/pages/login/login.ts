@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
-import { GooglePlus } from '@ionic-native/google-plus';
-import * as firebase from 'firebase/app';
-import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
+import { LoggerProvider } from '../../providers/logger/logger';
 
 /**
 * Generated class for the LoginPage page.
@@ -25,10 +21,13 @@ export class LoginPage {
 
     private email: string;
     private password: string;
-    private userProfile: Observable<firebase.User>;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private firebase: AngularFireAuth, private googlePlus: GooglePlus, private alert: AlertController) {
-        this.userProfile = firebase.authState;
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        private translate: TranslateService,
+        private alert: AlertController,
+        private logger: LoggerProvider) {
+
     }
 
     public ionViewDidLoad(): void {
@@ -36,15 +35,13 @@ export class LoginPage {
     }
 
     public loginGooglePlus(): void {
-        this.googlePlus.login({
-            webClientId: FIREBASE_CREDENTIALS.webClientId,
-            offline: true
-        }).then(res => {
+        this.logger.googleLogIn().then(res => {
             this.alert.create({
                 title: 'Connection',
                 subTitle: this.translate.instant('googleplus-connexion-success-message'),
                 buttons: ['Have fun']
             }).present();
+            this.navCtrl.setRoot(HomePage);
         }).catch(err => {
             this.alert.create({
                 title: 'Erreur de connection',
@@ -55,22 +52,23 @@ export class LoginPage {
     }
 
     public loginSample(): void {
-        this.firebase.auth.signInWithEmailAndPassword(this.email, this.password).then((result) => {
-            // si connection réalisée avec succés
-            if (result) {
-                this.alert.create({
-                    title: 'Connection',
-                    subTitle: this.translate.instant('sample-connexion-success-message'),
-                    buttons: ['Have fun']
-                }).present();
-                this.navCtrl.setRoot(HomePage);
-            }
-        }).catch((error) => {
+        this.logger.sampleLogIn(this.email, this.password).then(res => {
+            this.alert.create({
+                title: 'Connection',
+                subTitle: this.translate.instant('sample-connexion-success-message'),
+                buttons: ['Have fun']
+            }).present();
+            this.navCtrl.setRoot(HomePage);
+        }).catch(err => {
             this.alert.create({
                 title: 'Erreur de connection',
-                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + error,
+                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + err,
                 buttons: ['OK']
             }).present();
         });
+    }
+
+    public logOut(): void {
+        this.logger.logOut();
     }
 }
