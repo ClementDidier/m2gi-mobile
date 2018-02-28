@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Events } from 'ionic-angular';
 
 /*
 Generated class for the LoggerProvider provider.
@@ -18,20 +19,28 @@ export class LoggerProvider {
     private userProfile: firebase.User
     public displayName: string;
 
-    constructor(private fireauth: AngularFireAuth, private googlePlus: GooglePlus) {
+    constructor(private fireauth: AngularFireAuth, private googlePlus: GooglePlus, public events: Events) {
         this.fireauth.authState.subscribe(res => {
             if (res && res.uid) {
                 this.userProfile = res;
                 this.displayName = res.displayName;
+                this.events.publish('user:connected', this.userProfile);
             } else {
                 this.userProfile = null;
                 this.displayName = null;
+                this.events.publish('user:disconnected');
             }
         });
     }
 
     public isLogged(): boolean {
         return this.userProfile !== null;
+    }
+
+    public getUserId() {
+        if(this.isLogged())
+            return this.userProfile.uid;
+        return null;
     }
 
     public sampleLogIn(email: string, password: string) {

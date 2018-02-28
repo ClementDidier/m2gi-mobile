@@ -52,20 +52,22 @@ export class LoginPage {
     }
 
     public loginSample(): void {
-        this.logger.sampleLogIn(this.email, this.password).then(res => {
-            this.alert.create({
-                title: 'Connection',
-                subTitle: this.translate.instant('sample-connexion-success-message'),
-                buttons: ['Have fun']
-            }).present();
-            this.navCtrl.setRoot(HomePage);
-        }).catch(err => {
-            this.alert.create({
-                title: 'Erreur de connection',
-                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + err,
-                buttons: ['OK']
-            }).present();
-        });
+        if(this.email && this.password) {
+            this.logger.sampleLogIn(this.email, this.password).then(res => {
+                this.alert.create({
+                    title: 'Connection',
+                    subTitle: this.translate.instant('sample-connexion-success-message'),
+                    buttons: ['Have fun']
+                }).present();
+                this.navCtrl.setRoot(HomePage);
+            }).catch(err => {
+                this.alert.create({
+                    title: 'Erreur de connection',
+                    subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + err,
+                    buttons: ['OK']
+                }).present();
+            });
+        }
     }
 
     public logOut(): void {
