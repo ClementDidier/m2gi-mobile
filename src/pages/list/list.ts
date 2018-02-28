@@ -76,6 +76,7 @@ export class ListPage {
             ]
         }).present();
     }
+
     private addItem() {
         this.alertCtrl.create({
             title: this.translate.instant('adding-element-modal-title'),

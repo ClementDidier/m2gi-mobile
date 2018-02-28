@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Select } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,8 +19,15 @@ import { LoggerProvider } from '../../providers/logger/logger';
 })
 export class LoginPage {
 
+    @ViewChild('sectionSelect') sectionSelect: Select;
+
     private email: string;
     private password: string;
+
+    public langs: any = [
+        'fr',
+        'gb'
+    ];
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -28,6 +35,7 @@ export class LoginPage {
         private alert: AlertController,
         private logger: LoggerProvider) {
 
+        this.translate.use('fr');
     }
 
     public ionViewDidLoad(): void {
@@ -72,5 +80,18 @@ export class LoginPage {
 
     public logOut(): void {
         this.logger.logOut();
+    }
+
+    public getLangs(): string[] {
+        let res = this.langs.filter(l => l !== this.translate.currentLang);
+        return res;
+    }
+
+    public doLangSelection(): void {
+        this.sectionSelect.open();
+    }
+
+    public onSelectChange(selectedLang: any): void {
+        this.translate.use(selectedLang);
     }
 }

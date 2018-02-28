@@ -1,4 +1,5 @@
 {
+    "lang": "Français",
     "googleplus-connexion-button-caption" : "CONNECTION GOOGLE",
     "googleplus-connexion-success-message" : "Connecté au service GooglePlus avec succés !",
     "googleplus-connexion-failed-message" : "Une erreur est survenue lors de la tentative de connection.",
@@ -18,5 +19,7 @@
     "adding-element-modal-title": "Ajouter un nouvel élément",
     "adding-element-modal-content": "Entrez les informations que vous souhaitez ajouter à la liste",
     "editing-element-modal-title": "Modifier l'élément",
-    "editing-element-modal-content": "Modifiez les informations de l'élément de la liste"
+    "editing-element-modal-content": "Modifiez les informations de l'élément de la liste",
+    "fr": "Français",
+    "gb": "Anglais"
 }
