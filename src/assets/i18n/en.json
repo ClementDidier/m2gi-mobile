@@ -5,5 +5,18 @@
     "sample-connexion-button-caption" : "SIMPLE CONNEXION",
     "sample-connexion-success-message" : "Connected successfully to ionic-todo application !",
     "sample-connexion-failed-message" : "An error occured while service trying to connect to ionic-todo server.",
-    "disconnection-button-caption" : "DISCONNECT"
+    "disconnection-button-caption" : "DISCONNECT",
+    "remove-button-caption": "Remove",
+    "add-button-caption": "Add",
+    "edit-button-caption": "Edit",
+    "cancel-button-caption": "Cancel",
+    "valid-button-caption": "Valid",
+    "mail-address-label": "Mail address",
+    "password-label": "Password",
+    "removing-confirmation-modal-title": "Confirm remove task",
+    "removing-confirmation-modal-content": "Are you sure to remove this element ?",
+    "adding-element-modal-title": "Add new element",
+    "adding-element-modal-content": "Type information you want add in list",
+    "editing-element-modal-title": "Edit element",
+    "editing-element-modal-content": "Edit information of the element in the list"
 }

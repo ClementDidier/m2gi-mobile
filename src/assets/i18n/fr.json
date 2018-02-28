@@ -5,5 +5,18 @@
     "sample-connexion-button-caption" : "CONNECTION SIMPLE",
     "sample-connexion-success-message" : "Connecté avec succés à l'application ionic-todo !",
     "sample-connexion-failed-message" : "Une erreur est survenue lors de la tentative de connection au serveur ionic-todo.",
-    "disconnection-button-caption" : "SE DECONNECTER"
+    "disconnection-button-caption" : "SE DECONNECTER",
+    "remove-button-caption": "Supprimer",
+    "add-button-caption": "Ajouter",
+    "edit-button-caption": "Editer",
+    "cancel-button-caption": "Annuler",
+    "valid-button-caption": "Valider",
+    "mail-address-label": "Adresse email",
+    "password-label": "Mot de passe",
+    "removing-confirmation-modal-title": "Confirmation de suppression",
+    "removing-confirmation-modal-content": "Êtes vous sûr de vouloir supprimer cet élément ?",
+    "adding-element-modal-title": "Ajouter un nouvel élément",
+    "adding-element-modal-content": "Entrez les informations que vous souhaitez ajouter à la liste",
+    "editing-element-modal-title": "Modifier l'élément",
+    "editing-element-modal-content": "Modifiez les informations de l'élément de la liste"
 }

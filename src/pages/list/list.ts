@@ -5,6 +5,7 @@ import { TodoItem } from '../../model/todo-item.model';
 import { LoginPage } from '../login/login';
 import { TodoProvider } from '../../providers/todo/todo';
 import { LoggerProvider } from '../../providers/logger/logger';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
 * Generated class for the ListPage page.
@@ -22,7 +23,12 @@ export class ListPage {
 
     private list: TodoList;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoProvider, private logger: LoggerProvider, private alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController,
+         public navParams: NavParams,
+         public todoService: TodoProvider,
+         private logger: LoggerProvider,
+         private alertCtrl: AlertController,
+         private translate: TranslateService) {
         var uuid = this.navParams.get('id');
         var name = this.navParams.get('name');
 
@@ -51,18 +57,18 @@ export class ListPage {
 
     private confirmItemDeletion(listId, todoId) {
         this.alertCtrl.create({
-            title: 'Confirmation de suppression',
-            message: "Êtes-vous sûr de supprimer l'élément ?",
+            title: this.translate.instant('removing-confirmation-modal-title'),
+            message: this.translate.instant('removing-confirmation-modal-content'),
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translate.instant('cancel-button-caption'),
                     role: 'cancel',
                     handler: () => {
                         console.log('Cancel clicked');
                     }
                 },
                 {
-                    text: 'Valider',
+                    text: this.translate.instant('valid-button-caption'),
                     handler: () => {
                         this.todoService.deleteTodo(listId, todoId);
                     }
@@ -72,8 +78,8 @@ export class ListPage {
     }
     private addItem() {
         this.alertCtrl.create({
-            title: 'Ajouter un item',
-            message: 'Entrez les informations sur l\élement à ajouter à la liste ' + this.list.name + '.',
+            title: this.translate.instant('adding-element-modal-title'),
+            message: this.translate.instant('adding-element-modal-content') + ' ' + this.list.name + '.',
             inputs: [
                 {
                     name: 'name',
@@ -91,11 +97,11 @@ export class ListPage {
             ] ,
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translate.instant('cancel-button-caption'),
                     role: 'cancel'
                 },
                 {
-                    text: 'Valider',
+                    text: this.translate.instant('valid-button-caption'),
                     handler: data => {
                         this.todoService.addTodo(this.list.uuid, data.name, data.completed, data.desc);
                     }
@@ -105,8 +111,8 @@ export class ListPage {
     }
     private editItem(item : TodoItem) {
         this.alertCtrl.create({
-            title: 'Modifier un item',
-            message: 'Entrez les informations sur l\élement à modifier de la liste ' + this.list.name + '.',
+            title: this.translate.instant('editing-element-modal-title'),
+            message: this.translate.instant('editing-element-modal-content') + ' ' + this.list.name + '.',
             inputs: [
                 {
                     name: 'name',
@@ -125,11 +131,11 @@ export class ListPage {
             ] ,
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translate.instant('cancel-button-caption'),
                     role: 'cancel'
                 },
                 {
-                    text: 'Valider',
+                    text: this.translate.instant('valid-button-caption'),
                     handler: (data) => {
                         this.todoService.editTodo(this.list.uuid, {uuid : item.uuid, name: data.name, desc : data.desc, complete : data.completed });
                     }
