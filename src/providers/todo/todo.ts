@@ -69,8 +69,8 @@ export class TodoProvider {
         return Observable.of(this.data);
     }
 
-    public getTodos(uuid:String) : Observable<TodoItem[]> {
-        return Observable.of(this.data.find(d => d.uuid == uuid).items)
+    public getTodos(uid: String) : Observable<TodoItem[]> {
+        return Observable.of(this.data.find(d => d.uuid == uid).items);
     }
 
     public editTodo(listUuid : String, editedItem: TodoItem): void {
@@ -78,8 +78,8 @@ export class TodoProvider {
         let index = items.findIndex(value => value.uuid == editedItem.uuid);
         items[index] = editedItem;
     }
-    
-    public editList(listUuid : String,listName : String): void {
+
+    public editList(listUuid : String, listName : String): void {
         let list = this.data.find(d => d.uuid == listUuid);
         let index = this.data.findIndex(value => value.uuid == listUuid);
         if (index != -1) {
@@ -87,9 +87,9 @@ export class TodoProvider {
         }
     }
 
-    public deleteTodo(listUuid: String, uuid: String): void {
+    public deleteTodo(listUuid: String, uid: String): void {
         let items = this.data.find(d => d.uuid == listUuid).items;
-        let index = items.findIndex(value => value.uuid == uuid);
+        let index = items.findIndex(value => value.uuid == uid);
         if (index != -1) {
             items.splice(index,1);
         }

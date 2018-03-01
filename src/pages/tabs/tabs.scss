@@ -1,0 +1,16 @@
+ion-select {
+    position: absolute;
+    .select-icon, .select-text {
+        display: none !important;  /* hidden triangle icon and selected text */
+    }
+}
+ion-label {
+    padding: 5px;
+    font-size: 15px;
+}
+.label-title {
+    font-size: 20px;
+}
+ion-icon {
+    font-size: 1.5em;
+}
