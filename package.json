@@ -62,11 +62,16 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-firebase": {},
-      "cordova-plugin-googleplus": {}
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.554302347766-p7rm12qcts88kh68c4eleevl29j0i6jc"
+      }
     },
     "platforms": [
       "android",
       "browser"
     ]
+  },
+  "config": {
+    "ionic_copy": "./config/copy.config.js"
   }
 }
