@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import {TodoItem} from "../../model/todo-item.model";
 import {TodoList} from "../../model/todo-list.model";
 import {Observable} from "rxjs/Observable";
 import {v4 as uuid} from 'uuid';
+import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import 'rxjs/Rx';
-
+import { LoggerProvider } from '../logger/logger';
+import { HttpClient } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 /*
 Generated class for the TodoProvider provider.
 
@@ -61,8 +66,7 @@ export class TodoProvider {
         }
     ];
 
-    constructor() {
-        console.log('Hello TodoServiceProvider Provider');
+    constructor(private firedatabase : AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
     }
 
     public getList(): Observable<TodoList[]> {
@@ -78,7 +82,7 @@ export class TodoProvider {
         let index = items.findIndex(value => value.uuid == editedItem.uuid);
         items[index] = editedItem;
     }
-    
+
     public editList(listUuid : String,listName : String): void {
         let list = this.data.find(d => d.uuid == listUuid);
         let index = this.data.findIndex(value => value.uuid == listUuid);
@@ -104,11 +108,8 @@ export class TodoProvider {
     }
 
     public addList(name: String): void {
-        this.data.push({
-            uuid : uuid(),
-            name : name.toString(),
-            items : []
-        });
+      console.log(this.firedatabase.list('/lists').push('{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
+      //console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
     }
 
     public addTodo(listUuid: String, itemName : String, completed : boolean, description : String): void {
