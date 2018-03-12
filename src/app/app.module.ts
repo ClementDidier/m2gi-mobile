@@ -17,7 +17,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireList } from 'angularfire2/database';
 import { FIREBASE_CREDENTIALS } from '../firebase.credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
@@ -47,7 +47,8 @@ import { LoggerProvider } from '../providers/logger/logger';
         }),
         AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
         AngularFireAuthModule,
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        AngularFireList
       ],
     bootstrap: [IonicApp],
     entryComponents: [

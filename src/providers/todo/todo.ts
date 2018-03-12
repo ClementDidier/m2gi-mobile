@@ -70,7 +70,13 @@ export class TodoProvider {
     }
 
     public getList(): Observable<TodoList[]> {
-        return Observable.of(this.data);
+        var dataList = [];
+        var angularDataList = this.firedatabase.list('/lists');
+        angularDataList.snapshotChanges().map(todo => todo.map(todo => todo)).subscribe(values => {
+        console.log(values);
+        dataList.push(values);
+      });
+        return Observable.of(dataList);
     }
 
     public getTodos(uid: String) : Observable<TodoItem[]> {
@@ -108,7 +114,14 @@ export class TodoProvider {
     }
 
     public addList(name: String): void {
-      console.log(this.firedatabase.list('/lists').push('{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
+      var newList = this.firedatabase.list('/lists').push('{}');
+      newList.set(
+         {
+           uuid :  uuid() ,
+           name : name.toString(),
+           items: []
+        }
+      );
       //console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
     }
 
