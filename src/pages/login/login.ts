@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
@@ -27,7 +27,6 @@ export class LoginPage {
         private translate: TranslateService,
         private alert: AlertController,
         private logger: LoggerProvider) {
-
     }
 
     public ionViewDidLoad(): void {
@@ -37,14 +36,14 @@ export class LoginPage {
     public loginGooglePlus(): void {
         this.logger.googleLogIn().then(res => {
             this.alert.create({
-                title: 'Connection',
+                title: this.translate.instant('connection-success-modal-title'),
                 subTitle: this.translate.instant('googleplus-connexion-success-message'),
                 buttons: ['Have fun']
             }).present();
             this.navCtrl.setRoot(HomePage);
         }).catch(err => {
             this.alert.create({
-                title: 'Erreur de connection',
+                title: this.translate.instant('connection-error-modal-title'),
                 subTitle: this.translate.instant('googleplus-connexion-failed-message') + '\nMessage : ' + err,
                 buttons: ['OK']
             }).present();
@@ -52,20 +51,22 @@ export class LoginPage {
     }
 
     public loginSample(): void {
-        this.logger.sampleLogIn(this.email, this.password).then(res => {
-            this.alert.create({
-                title: 'Connection',
-                subTitle: this.translate.instant('sample-connexion-success-message'),
-                buttons: ['Have fun']
-            }).present();
-            this.navCtrl.setRoot(HomePage);
-        }).catch(err => {
-            this.alert.create({
-                title: 'Erreur de connection',
-                subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + err,
-                buttons: ['OK']
-            }).present();
-        });
+        if(this.email && this.password) {
+            this.logger.sampleLogIn(this.email, this.password).then(res => {
+                this.alert.create({
+                    title: this.translate.instant('connection-success-modal-title'),
+                    subTitle: this.translate.instant('sample-connexion-success-message'),
+                    buttons: ['Have fun']
+                }).present();
+                this.navCtrl.setRoot(HomePage);
+            }).catch(err => {
+                this.alert.create({
+                    title: this.translate.instant('connection-error-modal-title'),
+                    subTitle: this.translate.instant('sample-connexion-failed-message') + '\nMessage : ' + err,
+                    buttons: ['OK']
+                }).present();
+            });
+        }
     }
 
     public logOut(): void {

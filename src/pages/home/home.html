@@ -1,11 +1,18 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to our todo list app !  🤗🤗🤗</h2>
-
-  <todo-list></todo-list>
+<ion-content padding style="background: url(assets/imgs/bglogin.jpg) center; background-size: cover;">
+    <ion-card>
+        <ion-card-header>
+            <ion-label>
+                <ion-icon name="list-box" item-start>
+                {{ 'task-list-label-caption' | translate }}
+                </ion-icon>
+            </ion-label>
+        </ion-card-header>
+        <todo-list></todo-list>
+    </ion-card>
 </ion-content>

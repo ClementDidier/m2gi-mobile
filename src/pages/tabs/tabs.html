@@ -1,5 +1,25 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Login" tabIcon="contact"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+<ion-header>
+    <ion-navbar>
+        <ion-label class="label-title" margin-left="20px">IonicTodos</ion-label>
+        <ion-buttons end>
+            <button ion-button margin-right="10px" (click)="doLangSelection()">
+                <ion-icon class="flag-icon flag-icon-{{ translate.currentLang }}">
+                    <ion-select #sectionSelect (ngModel)="login"  (ionChange)="logger.onSelectChange($event)">
+                        <ion-option value="{{ translate.currentLang }}" selected="true">{{ 'lang' | translate }}</ion-option>
+                        <ion-option *ngFor="let lang of logger.getLangs()" value="{{ lang }}">{{ lang | translate }}</ion-option>
+                    </ion-select>
+                </ion-icon>
+                <ion-label>{{ translate.currentLang }}</ion-label>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-tabs *ngIf="isConnected">
+    <ion-tab [root]="tab1Root" tabTitle="Profil" tabIcon="contact"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+</ion-tabs>
+<ion-tabs *ngIf="!isConnected">
+    <ion-tab [root]="tab1Root" tabTitle="Login" tabIcon="contact"></ion-tab>
 </ion-tabs>

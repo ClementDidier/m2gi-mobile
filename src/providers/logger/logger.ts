@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app';
 import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Events } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 /*
 Generated class for the LoggerProvider provider.
@@ -15,23 +17,39 @@ and Angular DI.
 @Injectable()
 export class LoggerProvider {
 
-    private userProfile: firebase.User
+    private langs: any = [
+        'fr',
+        'gb'
+    ];
+
+    private userProfile: firebase.User;
     public displayName: string;
 
-    constructor(private fireauth: AngularFireAuth, private googlePlus: GooglePlus) {
+    constructor(private fireauth: AngularFireAuth,
+        private googlePlus: GooglePlus,
+        public events: Events,
+        private translate: TranslateService) {
         this.fireauth.authState.subscribe(res => {
             if (res && res.uid) {
                 this.userProfile = res;
                 this.displayName = res.displayName;
+                this.events.publish('user:connected', this.userProfile);
             } else {
                 this.userProfile = null;
                 this.displayName = null;
+                this.events.publish('user:disconnected');
             }
         });
     }
 
     public isLogged(): boolean {
         return this.userProfile !== null;
+    }
+
+    public getUserId() {
+        if(this.isLogged())
+            return this.userProfile.uid;
+        return null;
     }
 
     public sampleLogIn(email: string, password: string) {
@@ -54,8 +72,8 @@ export class LoggerProvider {
                 offline: true
             }).then(res => {
                 const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-                this.fireauth.auth.signInWithCredential(firecreds).then((res) => {
-                    resolve(res);
+                this.fireauth.auth.signInWithCredential(firecreds).then((result) => {
+                    resolve(result);
                 }).catch((err) => {
                     reject(err);
                 });
@@ -69,5 +87,14 @@ export class LoggerProvider {
         this.fireauth.auth.signOut().then(() => {
             this.userProfile = null;
         });
+    }
+
+    public getLangs(): string[] {
+        let res = this.langs.filter(l => l !== this.translate.currentLang);
+        return res;
+    }
+
+    public onSelectChange(selectedLang: any): void {
+        this.translate.use(selectedLang);
     }
 }

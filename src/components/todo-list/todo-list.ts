@@ -4,6 +4,7 @@ import { TodoProvider } from '../../providers/todo/todo';
 import { TodoItem } from '../../model/todo-item.model';
 import { TodoList } from '../../model/todo-list.model';
 import { ListPage } from '../../pages/list/list';
+import { TranslateService } from '@ngx-translate/core';
 import { NavController, AlertController } from 'ionic-angular';
 /**
 * Generated class for the TodoListComponent component.
@@ -20,7 +21,10 @@ export class TodoListComponent {
     private subscriber: Observable<TodoList[]>;
     private items: TodoList[];
 
-    constructor(public todoService: TodoProvider, public navCtrl: NavController, private alertCtrl: AlertController) {
+    constructor(public todoService: TodoProvider,
+         public navCtrl: NavController,
+         private alertCtrl: AlertController,
+         private translate: TranslateService) {
         this.subscriber = todoService.getList();
         this.subscriber.subscribe(items => this.items = items);
     }
