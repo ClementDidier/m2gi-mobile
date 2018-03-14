@@ -70,17 +70,13 @@ export class TodoProvider {
     }
 
     public getList(): Observable<TodoList[]> {
-        var dataList = [];
         var angularDataList = this.firedatabase.list('/lists');
-        angularDataList.snapshotChanges().map(todo => todo.map(todo => todo)).subscribe(values => {
-        console.log(values);
-        dataList.push(values);
-      });
-        return Observable.of(dataList);
+        return this.todoListPresenter(angularDataList.snapshotChanges());
     }
 
     public getTodos(uid: String) : Observable<TodoItem[]> {
-        return Observable.of(this.data.find(d => d.uuid == uid).items);
+      var angularDataList = this.firedatabase.list('/lists/'+uid+'/items');
+      return Observable.of(this.itemsPresenter(angularDataList.snapshotChanges()));
     }
 
     public editTodo(listUuid : String, editedItem: TodoItem): void {
@@ -137,4 +133,27 @@ export class TodoProvider {
             });
         }
     }
+
+  // Provided by Alban Bertolini
+  private todoListPresenter(todoList) {
+    return todoList.map(changes => {
+      return changes.map(c => ({
+        uuid: c.payload.key,
+        ...c.payload.val(),
+        items: this.itemsPresenter(c.payload.val().items)
+      }));
+    });
+  }
+
+  public itemsPresenter(items) {
+    if (!items) { return []; }
+
+    return Object.keys(items).map(function(key) {
+      const item = items[key];
+      return {
+        uuid: key,
+        ...item
+      };
+    });
+  }
 }

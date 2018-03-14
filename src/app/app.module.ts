@@ -48,7 +48,6 @@ import { LoggerProvider } from '../providers/logger/logger';
         AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
-        AngularFireList
       ],
     bootstrap: [IonicApp],
     entryComponents: [
