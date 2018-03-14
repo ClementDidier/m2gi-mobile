@@ -16,6 +16,7 @@
     "mail-address-label": "Adresse email",
     "password-label": "Mot de passe",
     "completed-label": "Complétée",
+    "return-label": "Retour",
     "removing-confirmation-modal-title": "Confirmation de suppression",
     "removing-confirmation-modal-content": "Êtes vous sûr de vouloir supprimer cet élément ?",
     "adding-element-modal-title": "Ajouter un nouvel élément",

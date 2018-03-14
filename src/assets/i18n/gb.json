@@ -16,6 +16,7 @@
     "mail-address-label": "Mail address",
     "password-label": "Password",
     "completed-label": "Completed",
+    "return-label": "Return",
     "removing-confirmation-modal-title": "Confirm remove task",
     "removing-confirmation-modal-content": "Are you sure to remove this element ?",
     "adding-element-modal-title": "Add new element",
