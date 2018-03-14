@@ -25,5 +25,6 @@
     "hello": "Bonjour",
     "connection-error-modal-title": "Erreur de connexion",
     "connection-success-modal-title": "Connexion",
-    "task-list-label-caption": "Vos listes de tâches"
+    "task-list-label-caption": "Vos listes de tâches",
+    "todos-list-label-caption": "Vos tâches"
 }

@@ -10,25 +10,35 @@ Ionic pages and navigation.
     </ion-navbar>
 </ion-header>
 
+<ion-content padding style="background: url(assets/imgs/bglogin.jpg) center; background-size: cover;">
+    <ion-card>
+        <ion-card-header>
+            <ion-label>
+                <ion-icon name="done-all" item-start>
+                {{ 'todos-list-label-caption' | translate }}
+                </ion-icon>
+            </ion-label>
+        </ion-card-header>
+        <ion-list>
+            <ion-item-sliding *ngFor='let todo of list.items'>
+                <ion-item>
+                    <todo-item item-content [todo]='todo'></todo-item>
+                </ion-item>
+                <ion-item-options side='left'>
+                    <button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger">
+                        <ion-icon name="close"></ion-icon>{{ 'remove-button-caption' | translate }}
+                    </button>
+                    <button ion-button (click)='editItem(todo)' color="secondary">
+                        <ion-icon name="pricetag"></ion-icon>{{ 'edit-button-caption' | translate }}
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
 
-<ion-content padding>
-    Identifiant de la liste : {{ list.uuid }}
-
-    <ion-list>
-        <ion-item-sliding *ngFor='let todo of list.items'>
-            <ion-item>
-                <todo-item item-content [todo]='todo'></todo-item>
-            </ion-item>
-            <ion-item-options side='left'>
-                <button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger">
-                    <ion-icon name="close"></ion-icon>{{ 'remove-button-caption' | translate }}
-                </button>
-                <button ion-button (click)='editItem(todo)' color="secondary">
-                    <ion-icon name="pricetag"></ion-icon>{{ 'edit-button-caption' | translate }}
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
-    <button ion-button round (click)='addItem()'><ion-icon name="add-circle">{{ 'add-button-caption' | translate }}</ion-icon></button>
-
+        <ion-buttons end>
+            <button ion-button color="secondary" (click)='addItem()'>
+                <ion-icon name="add"> {{ 'add-button-caption' | translate }}</ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-card>
 </ion-content>
