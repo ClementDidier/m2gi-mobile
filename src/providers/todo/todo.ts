@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import {TodoItem} from "../../model/todo-item.model";
 import {TodoList} from "../../model/todo-list.model";
 import {Observable} from "rxjs/Observable";
 import {v4 as uuid} from 'uuid';
+import { FIREBASE_CREDENTIALS } from '../../firebase.credentials';
 import 'rxjs/Rx';
-
+import { LoggerProvider } from '../logger/logger';
+import { HttpClient } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 /*
 Generated class for the TodoProvider provider.
 
@@ -61,16 +66,17 @@ export class TodoProvider {
         }
     ];
 
-    constructor() {
-        console.log('Hello TodoServiceProvider Provider');
+    constructor(private firedatabase : AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
     }
 
     public getList(): Observable<TodoList[]> {
-        return Observable.of(this.data);
+        var angularDataList = this.firedatabase.list('/lists');
+        return this.todoListPresenter(angularDataList.snapshotChanges());
     }
 
     public getTodos(uid: String) : Observable<TodoItem[]> {
-        return Observable.of(this.data.find(d => d.uuid == uid).items);
+      var angularDataList = this.firedatabase.list('/lists/'+uid+'/items');
+      return Observable.of(this.itemsPresenter(angularDataList.snapshotChanges()));
     }
 
     public editTodo(listUuid : String, editedItem: TodoItem): void {
@@ -104,11 +110,15 @@ export class TodoProvider {
     }
 
     public addList(name: String): void {
-        this.data.push({
-            uuid : uuid(),
-            name : name.toString(),
-            items : []
-        });
+      var newList = this.firedatabase.list('/lists').push('{}');
+      newList.set(
+         {
+           uuid :  uuid() ,
+           name : name.toString(),
+           items: []
+        }
+      );
+      //console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
     }
 
     public addTodo(listUuid: String, itemName : String, completed : boolean, description : String): void {
@@ -123,4 +133,27 @@ export class TodoProvider {
             });
         }
     }
+
+  // Provided by Alban Bertolini
+  private todoListPresenter(todoList) {
+    return todoList.map(changes => {
+      return changes.map(c => ({
+        uuid: c.payload.key,
+        ...c.payload.val(),
+        items: this.itemsPresenter(c.payload.val().items)
+      }));
+    });
+  }
+
+  public itemsPresenter(items) {
+    if (!items) { return []; }
+
+    return Object.keys(items).map(function(key) {
+      const item = items[key];
+      return {
+        uuid: key,
+        ...item
+      };
+    });
+  }
 }
