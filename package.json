@@ -20,8 +20,9 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
-    "@ionic-native/core": "4.4.0",
+    "@ionic-native/core": "^4.5.3",
     "@ionic-native/firebase": "^4.5.2",
+    "@ionic-native/geolocation": "^4.5.3",
     "@ionic-native/google-plus": "^4.5.3",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/status-bar": "4.4.0",
@@ -32,8 +33,10 @@
     "cordova": "^8.0.0",
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.3",
+    "cordova-lib": "^8.0.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-firebase": "^0.1.25",
+    "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googleplus": "^5.2.1",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -64,11 +67,14 @@
       "cordova-plugin-firebase": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.554302347766-p7rm12qcts88kh68c4eleevl29j0i6jc"
+      },
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "Be located on your todos"
       }
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   },
   "config": {

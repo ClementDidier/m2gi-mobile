@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { TodoProvider } from '../../providers/todo/todo';
 import { LoggerProvider } from '../../providers/logger/logger';
 import { TranslateService } from '@ngx-translate/core';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
 * Generated class for the ListPage page.
@@ -15,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
 * Ionic pages and navigation.
 */
 
-@IonicPage()
 @Component({
     selector: 'page-list',
     templateUrl: 'list.html',
@@ -25,18 +25,29 @@ export class ListPage {
     private list: TodoList;
 
     constructor(public navCtrl: NavController,
-         public navParams: NavParams,
-         public todoService: TodoProvider,
-         private logger: LoggerProvider,
-         private alertCtrl: AlertController,
-         private translate: TranslateService) {
+        public navParams: NavParams,
+        public todoService: TodoProvider,
+        private logger: LoggerProvider,
+        private alertCtrl: AlertController,
+        private translate: TranslateService,
+        private geolocation: Geolocation)
+    {
         var uuid = this.navParams.get('id');
         var name = this.navParams.get('name');
+
+        this.geolocation.getCurrentPosition().then((resp) => {
+         // resp.coords.latitude
+         // resp.coords.longitude
+            console.log(resp);
+        }).catch((error) => {
+            console.log('Error getting location', error);
+        });
 
         this.list = {
             uuid: uuid,
             name: name,
-            items: []
+            items: [],
+            geoloc: ''
         };
         this.todoService.getTodos(uuid).subscribe(todoItems => this.list.items = todoItems);
     }

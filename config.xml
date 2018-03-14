@@ -3,7 +3,7 @@
     <name>ionic-todo</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.43.51:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -82,11 +82,10 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
-    <plugin name="cordova-plugin-googleplus" spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus">
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.554302347766-p7rm12qcts88kh68c4eleevl29j0i6jc" />
     </plugin>
-    <allow-navigation href="http://192.168.43.51:8100" />
-    <allow-navigation href="http://192.168.154.1:8100" />
-    <engine name="android" spec="7.0.0" />
     <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>

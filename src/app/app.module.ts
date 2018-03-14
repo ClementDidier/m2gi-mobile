@@ -22,6 +22,7 @@ import { FIREBASE_CREDENTIALS } from '../firebase.credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
 import { LoggerProvider } from '../providers/logger/logger';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { LoggerProvider } from '../providers/logger/logger';
         TodoProvider,
         GooglePlus,
         AlertController,
-        LoggerProvider
+        LoggerProvider,
+        Geolocation
     ]
 })
 

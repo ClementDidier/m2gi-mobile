@@ -5,14 +5,6 @@ import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoggerProvider } from '../../providers/logger/logger';
 
-/**
-* Generated class for the LoginPage page.
-*
-* See https://ionicframework.com/docs/components/#navigation for more info on
-* Ionic pages and navigation.
-*/
-
-@IonicPage()
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html',
