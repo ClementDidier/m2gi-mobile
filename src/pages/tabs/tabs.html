@@ -16,9 +16,9 @@
 </ion-header>
 
 <ion-tabs *ngIf="isConnected">
-    <ion-tab [root]="tab1Root" tabTitle="Profil" tabIcon="contact"></ion-tab>
-    <ion-tab [root]="tab2Root" tabTitle="Home" tabIcon="home"></ion-tab>
-    <ion-tab [root]="tab3Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+    <ion-tab [root]="tab1Root" tabTitle="{{ translate.instant('profil-tab-caption') }}" tabIcon="contact"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="{{ translate.instant('home-tab-caption') }}" tabIcon="home"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="{{ translate.instant('about-tab-caption') }}" tabIcon="information-circle"></ion-tab>
 </ion-tabs>
 <ion-tabs *ngIf="!isConnected">
     <ion-tab [root]="tab1Root" tabTitle="Login" tabIcon="contact"></ion-tab>

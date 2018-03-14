@@ -29,5 +29,8 @@
     "connection-error-modal-title": "Connection error",
     "connection-success-modal-title": "Connection",
     "task-list-label-caption": "Your tasks lists",
-    "todos-list-label-caption": "Your tasks"
+    "todos-list-label-caption": "Your tasks",
+    "home-tab-caption": "Home",
+    "about-tab-caption": "About",
+    "profil-tab-caption": "Profil"
 }
