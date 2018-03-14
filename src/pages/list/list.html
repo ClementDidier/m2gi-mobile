@@ -36,6 +36,11 @@ Ionic pages and navigation.
         </ion-list>
 
         <ion-buttons end>
+            <button ion-button color="light" (click)='returnParentPage()'>
+                <ion-icon name="return-left">
+                {{ 'return-label' | translate }}
+                </ion-icon>
+            </button>
             <button ion-button color="secondary" (click)='addItem()'>
                 <ion-icon name="add"> {{ 'add-button-caption' | translate }}</ion-icon>
             </button>

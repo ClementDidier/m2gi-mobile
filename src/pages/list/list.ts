@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, IonicModule, AlertController } fro
 import { TodoList } from '../../model/todo-list.model';
 import { TodoItem } from '../../model/todo-item.model';
 import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 import { TodoProvider } from '../../providers/todo/todo';
 import { LoggerProvider } from '../../providers/logger/logger';
 import { TranslateService } from '@ngx-translate/core';
@@ -51,6 +52,10 @@ export class ListPage {
             this.navCtrl.setRoot(LoginPage);
     }
 
+    private returnParentPage() {
+        this.navCtrl.setRoot(HomePage);
+    }
+
     public deleteItem(listid : string, todoid : string) {
         this.confirmItemDeletion(listid, todoid);
     }
@@ -77,7 +82,7 @@ export class ListPage {
         }).present();
     }
 
-    public addItem() {
+    private addItem() {
         this.alertCtrl.create({
             title: this.translate.instant('adding-element-modal-title'),
             message: this.translate.instant('adding-element-modal-content') + ' ' + this.list.name + '.',
@@ -110,6 +115,7 @@ export class ListPage {
             ]
         }).present();
     }
+
     private editItem(item : TodoItem) {
         this.alertCtrl.create({
             title: this.translate.instant('editing-element-modal-title'),
