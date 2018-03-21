@@ -22,9 +22,12 @@ export class LoginPage {
     }
 
     public ionViewDidLoad(): void {
-        console.log('ionViewDidLoad LoginPage');
+
     }
 
+    /**
+     * Réalise une tentative de connection au service GooglePlus
+     */
     public loginGooglePlus(): void {
         this.logger.googleLogIn().then(res => {
             this.alert.create({
@@ -42,6 +45,9 @@ export class LoginPage {
         });
     }
 
+    /**
+     * Réalise une tentative de connection au service TodoApp
+     */
     public loginSample(): void {
         if(this.email && this.password) {
             this.logger.sampleLogIn(this.email, this.password).then(res => {

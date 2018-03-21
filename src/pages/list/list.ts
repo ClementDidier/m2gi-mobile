@@ -171,7 +171,7 @@ export class ListPage {
         this.geolocation.getCurrentPosition().then((resp) => {
             return this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude);
         }).then((result: NativeGeocoderReverseResult) => {
-            console.log(JSON.stringify(result));
+            console.log('geolocate:', JSON.stringify(result));
         }).catch((error: any) => {
             console.log(error);
         });
