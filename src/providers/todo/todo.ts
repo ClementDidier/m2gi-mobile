@@ -26,6 +26,11 @@ export class TodoProvider {
     constructor(private logger: LoggerProvider, private firedatabase : AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
       console.log(this.logger.getUserId())
       //var angularDataList = this.firedatabase.list('/lists');
+      
+      var ref = firedatabase.database.ref(`/lists/`);
+      ref.on('value', (listSnapshot) => {
+        console.log(listSnapshot.val());
+      });
       //this.data = this.todoListPresenter(angularDataList.snapshotChanges());
     }
 
