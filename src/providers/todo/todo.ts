@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 /*
 Generated class for the TodoProvider provider.
 
@@ -20,15 +21,26 @@ and Angular DI.
 @Injectable()
 export class TodoProvider {
 
-    data:TodoList[] = [];
+    data:TodoList[]=[];
 
-    constructor(private firedatabase : AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
+    constructor(private logger: LoggerProvider, private firedatabase : AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
+      console.log(this.logger.getUserId())
+      //var angularDataList = this.firedatabase.list('/lists');
+      //this.data = this.todoListPresenter(angularDataList.snapshotChanges());
     }
 
     public getList(): Observable<TodoList[]> {
-        var angularDataList = this.firedatabase.list('/lists');
-        return this.data = this.todoListPresenter(angularDataList.snapshotChanges());
-    }
+      var uid = this.logger.getUserId();
+      var user = this.firedatabase.list(`/users/${uid}`);
+      console.log('test2');
+      var obsListID = this.firedatabase.list(`/users/${uid}/lists`);
+      console.log(obsListID);
+      var obsTodoLists = combineLatest(obsListID.snapshotChanges().map(lID => this.firedatabase.list(`lists/${lID}`).snapshotChanges()));
+      console.log(this.todoListPresenter(obsTodoLists));
+      var angularDataList = this.firedatabase.list('/lists');
+      console.log(this.todoListPresenter(angularDataList.snapshotChanges()));
+      return this.todoListPresenter(obsTodoLists);
+   }
 
     public getTodos(uid: String) : Observable<TodoItem[]> {
       return Observable.of(this.data.find(d => d.uuid == uid).items);
