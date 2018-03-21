@@ -23,6 +23,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AlertController } from 'ionic-angular';
 import { LoggerProvider } from '../providers/logger/logger';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { Geolocation } from '@ionic-native/geolocation';
         GooglePlus,
         AlertController,
         LoggerProvider,
-        Geolocation
+        Geolocation,
+        NativeGeocoder
     ]
 })
 

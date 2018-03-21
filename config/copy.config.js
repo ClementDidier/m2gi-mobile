@@ -30,12 +30,12 @@ module.exports = {
         src: ['{{ROOT}}/node_modules/flag-icon-css/**/*'],
         dest: '{{BUILD}}/assets/flags'
     },
-    copyCordova: {
-        src: ['{{ROOT}}/node_modules/cordova/**/*'],
-        dest: '{{WWW}}/cordova'
-    },
-    copyCordova2: {
-        src: ['{{ROOT}}/node_modules/cordova/**/*'],
-        dest: '{{BUILD}}/cordova'
-    }
+    //copyCordova: {
+    //    src: ['{{ROOT}}/node_modules/cordova/**/*'],
+    //    dest: '{{WWW}}/cordova'
+    //},
+    //copyCordova2: {
+    //    src: ['{{ROOT}}/node_modules/cordova/**/*'],
+    //    dest: '{{BUILD}}/cordova'
+    //}
 }

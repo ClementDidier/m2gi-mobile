@@ -32,6 +32,11 @@ Ionic pages and navigation.
                         <ion-icon name="pricetag"></ion-icon>{{ 'edit-button-caption' | translate }}
                     </button>
                 </ion-item-options>
+                <ion-item-options side='right'>
+                    <button ion-button (click)='geolocate(todo)' color="secondary">
+                        <ion-icon name="locate"></ion-icon>{{ 'edit-button-caption' | translate }}
+                    </button>
+                </ion-item-options>
             </ion-item-sliding>
         </ion-list>
 

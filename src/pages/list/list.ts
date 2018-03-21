@@ -8,6 +8,7 @@ import { TodoProvider } from '../../providers/todo/todo';
 import { LoggerProvider } from '../../providers/logger/logger';
 import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 
 /**
 * Generated class for the ListPage page.
@@ -30,18 +31,11 @@ export class ListPage {
         private logger: LoggerProvider,
         private alertCtrl: AlertController,
         private translate: TranslateService,
-        private geolocation: Geolocation)
+        private geolocation: Geolocation,
+        private nativeGeocoder: NativeGeocoder)
     {
         var uuid = this.navParams.get('id');
         var name = this.navParams.get('name');
-
-        this.geolocation.getCurrentPosition().then((resp) => {
-         // resp.coords.latitude
-         // resp.coords.longitude
-            console.log(resp);
-        }).catch((error) => {
-            console.log('Error getting location', error);
-        });
 
         this.list = {
             uuid: uuid,
@@ -53,7 +47,7 @@ export class ListPage {
     }
 
     private ionViewDidLoad() {
-        console.log('ionViewDidLoad ListPage');
+        this.geolocate(null);
         if (!this.logger.isLogged())
             this.navCtrl.setRoot(LoginPage);
     }
@@ -93,6 +87,9 @@ export class ListPage {
         }).present();
     }
 
+    /**
+     * Affiche un popup utilisateur, d'ajout d'une nouvelle tâche pour la liste courante
+     */
     private addItem() {
         this.alertCtrl.create({
             title: this.translate.instant('adding-element-modal-title'),
@@ -127,6 +124,10 @@ export class ListPage {
         }).present();
     }
 
+    /**
+     * Affiche un popup utilisateur de mise à jour pour une tâche spécifiée
+     * @param item La tâche utilisateur à mêttre à jour
+     */
     private editItem(item : TodoItem) {
         this.alertCtrl.create({
             title: this.translate.instant('editing-element-modal-title'),
@@ -160,5 +161,19 @@ export class ListPage {
                 }
             ]
         }).present();
+    }
+
+    /**
+     * Géolocalise l'utilisateur et fournit les informations textuelles correspondantes à la tâche spécifiée
+     * @param todo La tâche prenant en charge les informations textuelles de géolocalisation
+     */
+    private geolocate(todo: TodoItem) {
+        this.geolocation.getCurrentPosition().then((resp) => {
+            return this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude);
+        }).then((result: NativeGeocoderReverseResult) => {
+            console.log(JSON.stringify(result));
+        }).catch((error: any) => {
+            console.log(error);
+        });
     }
 }
