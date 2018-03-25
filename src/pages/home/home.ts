@@ -17,7 +17,6 @@ export class HomePage {
     }
 
     private ionViewDidLoad() {
-        console.log('ionViewDidLoad ListPage');
         if (!this.logger.isLogged())
             this.navCtrl.setRoot(LoginPage);
     }

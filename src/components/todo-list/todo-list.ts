@@ -6,6 +6,8 @@ import { TodoList } from '../../model/todo-list.model';
 import { ListPage } from '../../pages/list/list';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { LoggerProvider } from '../../providers/logger/logger';
+
 /**
 * Generated class for the TodoListComponent component.
 *
@@ -19,14 +21,22 @@ import { NavController, AlertController } from 'ionic-angular';
 export class TodoListComponent {
 
     private subscriber: Observable<TodoList[]>;
-    private items: TodoList[];
+    private items: TodoList[] = [];
 
     constructor(public todoService: TodoProvider,
          public navCtrl: NavController,
          private alertCtrl: AlertController,
-         private translate: TranslateService) {
-        this.subscriber = todoService.getList();
-        this.subscriber.subscribe(items => this.items = items);
+         private translate: TranslateService,
+         private logger: LoggerProvider) {
+           var lol;
+           console.log("wesh 123456",this.items);
+           this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
+           this.subscriber.subscribe(items => this.items = items);
+           console.log("wesh",this.items);
+    }
+    private ionViewDidLoad(){
+
+
     }
 
     public isCompleteCount(items : TodoItem[]) {

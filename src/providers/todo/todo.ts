@@ -29,17 +29,16 @@ export class TodoProvider {
 
 		// test des 2 fonctions :: TODO: Remove
 		var userId = this.logger.getUserId();
-		this.getListsOfUser(userId).then((res) => {
-			console.log('promise results:', res);
-		}).catch((err) => {
-			console.log('promise error:', err.message);
-		});
+	//	this.getListsOfUser(userId).then((res) => {
+	//		console.log('promise results:', res);
+	//	}).catch((err) => {
+	//		console.log('promise error:', err.message);
+	//	});
 		//firedatabase.list('/lists/', ref2 => ref2.orderByChild(''))
 		//this.data = this.todoListPresenter(angularDataList.snapshotChanges());
 	}
 
 	public getListsOfUser(userId: string) {
-		return new Promise((resolve, reject) => {
 			var lists = [];
 			var url = '/users/' + userId + '/lists';
 			var ref = this.firedatabase.database.ref(url);
@@ -51,11 +50,9 @@ export class TodoProvider {
 							lists.push(val);
 						});
 					});
-					resolve(lists);
 				}
 			});
-			//setTimeout(() => { reject(new Error('timeout on list retrieve function')), 3000});
-		});
+			return Observable.of(lists);
 	}
 
 	public getListById(id: string) {
