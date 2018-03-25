@@ -40,7 +40,7 @@ export class TodoProvider {
 
 	public getListsOfUser(userId: string) {
 			var lists = [];
-			var url = '/users/' + userId + '/lists';
+			var url = `/users/${userId}/lists`;
 			var ref = this.firedatabase.database.ref(url);
 			ref.once('value', (listSnapshot) => {
 				var listsId = listSnapshot.val();
@@ -56,33 +56,42 @@ export class TodoProvider {
 	}
 
 	public getListById(id: string) {
-		return new Promise((resolve, reject) => {
-			var url = '/lists/' + id;
-			console.log('url:', url);
-			var ref = this.firedatabase.database.ref(url);
-			ref.once('value', (listSnapshot) => {
-				resolve(listSnapshot.val());
-			});
-
-			//setTimeout(() => { reject(new Error('timeout on list retrieve function')), 3000});
-		});
+			return new Promise((resolve, reject) => {
+						var url = `/lists/${id}`;
+			 			var ref = this.firedatabase.database.ref(url);
+			 			ref.once('value', (listSnapshot) => {
+							resolve(listSnapshot.val());
+						});
+					});
+	}
+	public getListByUid(uid: string) {
+			return new Promise((resolve, reject) => {
+						var url = `/lists/`;
+						var ref = this.firedatabase.database.ref(url).orderByChild("uuid").equalTo(uid);
+						ref.once('value', (listSnapshot) => {
+							resolve(listSnapshot.val()[0]);
+						});
+					});
 	}
 
+	//deprecated
 	public getList(): Observable<TodoList[]> {
 		var uid = this.logger.getUserId();
 		var user = this.firedatabase.list(`/users/${uid}`);
-		console.log('test2');
 		var obsListID = this.firedatabase.list(`/users/${uid}/lists`);
-		console.log(obsListID);
 		var obsTodoLists = combineLatest(obsListID.snapshotChanges().map(lID => this.firedatabase.list(`lists/${lID}`).snapshotChanges()));
-		console.log(this.todoListPresenter(obsTodoLists));
 		var angularDataList = this.firedatabase.list('/lists');
-		console.log(this.todoListPresenter(angularDataList.snapshotChanges()));
 		return this.todoListPresenter(obsTodoLists);
 	}
 
-	public getTodos(uid: String): Observable<TodoItem[]> {
-		return Observable.of(this.data.find(d => d.uuid == uid).items);
+	public getTodos(uid: string): Observable<TodoItem[]> {
+		var todos = []
+		this.getListByUid(uid).then((val) => {
+			val['items'].forEach((item) =>{
+				todos.push(item)
+			});
+		});
+		return Observable.of(todos);
 	}
 
 	public editTodo(listUuid: String, editedItem: TodoItem): void {
@@ -127,8 +136,8 @@ export class TodoProvider {
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
 	}
 
-	public addTodo(listUuid: String, itemName: String, completed: boolean, description: String): void {
-		let list = this.data.find(d => d.uuid === listUuid);
+	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {
+		let list = this.getListById(listUuid);
 		let index = this.data.findIndex(value => value.uuid === listUuid);
 		if (index != -1) {
 			this.data[index].items.push({

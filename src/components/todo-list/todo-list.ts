@@ -28,11 +28,8 @@ export class TodoListComponent {
          private alertCtrl: AlertController,
          private translate: TranslateService,
          private logger: LoggerProvider) {
-           var lol;
-           console.log("wesh 123456",this.items);
            this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
            this.subscriber.subscribe(items => this.items = items);
-           console.log("wesh",this.items);
     }
     private ionViewDidLoad(){
 

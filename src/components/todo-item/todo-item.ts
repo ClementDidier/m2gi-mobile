@@ -17,8 +17,7 @@ export class TodoItemComponent {
     public todo: TodoItem;
 
     constructor() {
-        console.log('Hello TodoItemComponent Component');
     }
 
-    
+
 }
