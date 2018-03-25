@@ -42,16 +42,27 @@ export class LoggerProvider {
         });
     }
 
+    /**
+     * Obtient l'état de la connexion au service firebase / googleplus
+     */
     public isLogged(): boolean {
         return this.userProfile !== null;
     }
 
+    /**
+     * Obtient l'identifiant de l'utilisateur courant. Null dans la cas ou la connexion n'est pas établie.
+     */
     public getUserId() {
         if(this.isLogged())
             return this.userProfile.uid;
         return null;
     }
 
+    /**
+     * Réalise une tentative de connexion auprès du service Firebase
+     * @param email L'email identifiant le compte utilisateur
+     * @param password Le mot de passe du compte utilisateur
+     */
     public sampleLogIn(email: string, password: string) {
         return new Promise((resolve, reject) => {
             this.fireauth.auth.signInWithEmailAndPassword(email, password).then((result) => {
@@ -65,6 +76,9 @@ export class LoggerProvider {
         });
     }
 
+    /**
+     * Réalise un appel du plugin cordova natif GooglePlus, afin de s'authentifier avec un compte Google.
+     */
     public googleLogIn() {
         return new Promise((resolve, reject) => {
             this.googlePlus.login({

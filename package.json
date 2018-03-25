@@ -38,9 +38,9 @@
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-geolocation": "^4.0.1",
-    "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
+    "cordova-plugin-googleplus": "^5.2.2",
     "cordova-plugin-ionic-webview": "^1.1.16",
-    "cordova-plugin-nativegeocoder": "~3.1.1",
+    "cordova-plugin-nativegeocoder": "^3.1.1",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-statusbar": "^2.4.1",
     "cordova-plugin-whitelist": "^1.3.1",
@@ -51,7 +51,7 @@
     "ionicons": "3.0.0",
     "ng2-firebase": "^1.0.0",
     "robotodraft": "github:FontFaceKit/robotodraft",
-    "rxjs": "5.5.2",
+    "rxjs": "^5.5.7",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
   },
@@ -68,12 +68,10 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-firebase": {},
-      "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.554302347766-p7rm12qcts88kh68c4eleevl29j0i6jc"
-      },
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-nativegeocoder": {},
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-googleplus": {},
+      "cordova-plugin-nativegeocoder": {}
     },
     "platforms": [
       "browser",

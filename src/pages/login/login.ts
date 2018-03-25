@@ -22,7 +22,7 @@ export class LoginPage {
     }
 
     public ionViewDidLoad(): void {
-
+        // nothing
     }
 
     /**

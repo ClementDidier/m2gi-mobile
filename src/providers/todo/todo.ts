@@ -24,20 +24,13 @@ export class TodoProvider {
 	data: TodoList[] = [];
 
 	constructor(private logger: LoggerProvider, private firedatabase: AngularFireDatabase, private fireauth: AngularFireAuth, private http: HttpClient) {
-		console.log(this.logger.getUserId())
-		//var angularDataList = this.firedatabase.list('/lists');
-
-		// test des 2 fonctions :: TODO: Remove
-		var userId = this.logger.getUserId();
-	//	this.getListsOfUser(userId).then((res) => {
-	//		console.log('promise results:', res);
-	//	}).catch((err) => {
-	//		console.log('promise error:', err.message);
-	//	});
-		//firedatabase.list('/lists/', ref2 => ref2.orderByChild(''))
-		//this.data = this.todoListPresenter(angularDataList.snapshotChanges());
+		// nothing
 	}
 
+	/**
+	 * Obtient l'ensemble des listes de l'utilisateur spécifié
+	 * @param userId L'identifiant de l'utilisateur pour lequel les listes doivent être récupérées
+	 */
 	public getListsOfUser(userId: string) {
 			var lists = [];
 			var url = `/users/${userId}/lists`;
@@ -55,6 +48,10 @@ export class TodoProvider {
 			return Observable.of(lists);
 	}
 
+	/**
+	 * Obtient la liste avec le nom identifiant spécifié
+	 * @param id Le nom identifiant la liste à obtenir
+	 */
 	public getListById(id: string) {
 			return new Promise((resolve, reject) => {
 						var url = `/lists/${id}`;
@@ -64,11 +61,17 @@ export class TodoProvider {
 						});
 					});
 	}
+
+	/**
+	 * Obtient la liste avec l'identifiant unique spécifié
+	 * @param uid L'identifiant unique de la liste à obtenir
+	 */
 	public getListByUid(uid: string) {
 			return new Promise((resolve, reject) => {
 						var url = `/lists/`;
 						var ref = this.firedatabase.database.ref(url).orderByChild("uuid").equalTo(uid);
 						ref.once('value', (listSnapshot) => {
+							// TODO: test if list exists !
 							resolve(listSnapshot.val()[0]);
 						});
 					});
@@ -85,10 +88,10 @@ export class TodoProvider {
 	}
 
 	public getTodos(uid: string): Observable<TodoItem[]> {
-		var todos = []
+		var todos = [];
 		this.getListByUid(uid).then((val) => {
 			val['items'].forEach((item) =>{
-				todos.push(item)
+				todos.push(item);
 			});
 		});
 		return Observable.of(todos);
@@ -163,7 +166,7 @@ export class TodoProvider {
 	public itemsPresenter(items) {
 		if (!items) { return []; }
 
-		return Object.keys(items).map(function (key) {
+		return Object.keys(items).map((key) => {
 			const item = items[key];
 			return {
 				uuid: key,

@@ -168,12 +168,14 @@ export class ListPage {
      * @param todo La tâche prenant en charge les informations textuelles de géolocalisation
      */
     private geolocate(todo: TodoItem) {
+        console.log('geoloc');
         this.geolocation.getCurrentPosition().then((resp) => {
+            console.log(resp);
             return this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude);
         }).then((result: NativeGeocoderReverseResult) => {
             console.log('geolocate:', JSON.stringify(result));
         }).catch((error: any) => {
-            console.log(error);
+            console.log('geolocate error:', error);
         });
     }
 }

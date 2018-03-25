@@ -31,11 +31,15 @@ export class TodoListComponent {
            this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
            this.subscriber.subscribe(items => this.items = items);
     }
-    private ionViewDidLoad(){
 
-
+    private ionViewDidLoad() {
+        // nothing
     }
 
+    /**
+     * Obtient le nombre de tâches terminées dans la liste courante
+     * @param items La liste comportant les tâches à identifier
+     */
     public isCompleteCount(items : TodoItem[]) {
         let result = 0;
         items.forEach((i) => {
@@ -52,10 +56,18 @@ export class TodoListComponent {
         });
     }
 
+    /**
+     * Execute une demande de confirmation de suppression de la liste spécifiée auprès de l'utilisateur
+     * @param listuuid Identifiant de la liste à supprimer
+     */
     public deleteList(listuuid : string) {
         this.confirmListDeletion(listuuid);
     }
 
+    /**
+     * Affiche la demande de suppression de la liste spécifiée auprès de l'utilisateur. Invoque la méthode de suppression si validée.
+     * @param listUuid Identifiant de la liste à supprimer
+     */
     private confirmListDeletion(listUuid) {
         let alert = this.alertCtrl.create({
             title: 'Confirmation de suppression',
@@ -76,6 +88,9 @@ export class TodoListComponent {
         alert.present();
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'une nouvelle liste de tâches
+     */
     private addList() {
         this.alertCtrl.create({
             title: 'Ajouter une liste',
@@ -100,6 +115,11 @@ export class TodoListComponent {
             ]
         }).present();
     }
+
+    /**
+     * Edite la liste spécifiée par les nouvelles données entrées
+     * @param list La liste à éditée
+     */
     private editList(list : TodoList) {
         this.alertCtrl.create({
             title: 'Editer une liste',

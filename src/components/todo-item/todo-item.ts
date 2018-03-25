@@ -17,7 +17,6 @@ export class TodoItemComponent {
     public todo: TodoItem;
 
     constructor() {
+        // nothing
     }
-
-
 }
