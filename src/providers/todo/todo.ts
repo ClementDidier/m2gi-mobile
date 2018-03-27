@@ -33,16 +33,16 @@ export class TodoProvider {
 	 */
 	public getListsOfUser(userId: string) {
 			var lists = [];
-			var url = `/users/${userId}/lists`;
+			var url = `/users/${userId}/lists/`;
 			var ref = this.firedatabase.database.ref(url);
 			ref.once('value', (listSnapshot) => {
 				var listsId = listSnapshot.val();
-				if(listsId && listsId.length > 0) {
-					listsId.forEach(id => {
-						this.getListById(id).then((val) => {
+				if(listsId) {
+					for(var id in listsId){
+						this.getListByUid(listsId[id]).then((val) => {
 							lists.push(val);
 						});
-					});
+					}
 				}
 			});
 			return Observable.of(lists);
@@ -69,15 +69,34 @@ export class TodoProvider {
 	public getListByUid(uid: string) {
 			return new Promise((resolve, reject) => {
 						var url = `/lists/`;
-						var ref = this.firedatabase.database.ref(url).orderByChild("uuid").equalTo(uid);
-						ref.once('value', (listSnapshot) => {
-							// TODO: test if list exists !
-							resolve(listSnapshot.val()[0]);
+						var ref = this.firedatabase.database.ref(url);
+						ref.orderByChild("uuid").equalTo(uid);
+						ref.once('value').then((listSnapshot) => {
+							// TODO: test if list exists
+							var snap = listSnapshot.val();
+							for(var list in snap){
+								if (snap[list]['uuid'] == uid){
+									if(!snap[list]['items']){
+										snap[list]['items'] = [];
+									}
+									resolve(snap[list]);
+									break;
+								}
+							}
 						});
 					});
+
+//					ref.once('value', (listSnapshot) => {
+						// TODO: test if list exists !
+	//					console.log("abc",listSnapshot.val()[0]);
+//						resolve(listSnapshot.val()[0]);
+//					});
+//				});
 	}
 
-	//deprecated
+	/**
+	* @deprecated
+	**/
 	public getList(): Observable<TodoList[]> {
 		var uid = this.logger.getUserId();
 		var user = this.firedatabase.list(`/users/${uid}`);
@@ -127,15 +146,17 @@ export class TodoProvider {
 		}
 	}
 
-	public addList(name: String): void {
+	public addList(name: string, userId : string): void {
 		var newList = this.firedatabase.list('/lists').push('{}');
+		var newuuid = uuid();
 		newList.set(
 			{
-				uuid: uuid(),
+				uuid: newuuid,
 				name: name.toString(),
 				items: []
 			}
 		);
+		var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
 	}
 

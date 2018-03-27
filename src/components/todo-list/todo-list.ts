@@ -109,7 +109,7 @@ export class TodoListComponent {
                 {
                     text: 'Valider',
                     handler: (data) => {
-                        this.todoService.addList(data.listname);
+                        this.todoService.addList(data.listname, this.logger.getUserId());
                     }
                 }
             ]
