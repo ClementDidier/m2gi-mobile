@@ -110,6 +110,8 @@ export class TodoListComponent {
                     text: 'Valider',
                     handler: (data) => {
                         this.todoService.addList(data.listname, this.logger.getUserId());
+                        this.todoService.getListsOfUser(this.logger.getUserId());
+
                     }
                 }
             ]

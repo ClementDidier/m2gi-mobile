@@ -45,7 +45,8 @@ export class TodoProvider {
 					}
 				}
 			});
-			return Observable.of(lists);
+			this.data = lists;
+			return Observable.of(this.data);
 	}
 
 	/**
@@ -66,7 +67,7 @@ export class TodoProvider {
 	 * Obtient la liste avec l'identifiant unique spécifié
 	 * @param uid L'identifiant unique de la liste à obtenir
 	 */
-	public getListByUid(uid: string) {
+	public getListByUid(uid: string) : Promise<TodoList> {
 			return new Promise((resolve, reject) => {
 						var url = `/lists/`;
 						var ref = this.firedatabase.database.ref(url);
@@ -116,34 +117,34 @@ export class TodoProvider {
 		return Observable.of(todos);
 	}
 
-	public editTodo(listUuid: String, editedItem: TodoItem): void {
+	public editTodo(listUuid: String, editedItem: TodoItem): void {/*
 		let items = this.data.find(d => d.uuid == listUuid).items;
 		let index = items.findIndex(value => value.uuid == editedItem.uuid);
-		items[index] = editedItem;
+		items[index] = editedItem;*/
 	}
 
-	public editList(listUuid: String, listName: String): void {
+	public editList(listUuid: String, listName: String): void {/*
 		let list = this.data.find(d => d.uuid == listUuid);
 		let index = this.data.findIndex(value => value.uuid == listUuid);
 		if (index != -1) {
 			this.data[index].name = listName.toString();
-		}
+		}*/
 	}
 
-	public deleteTodo(listUuid: String, uid: String): void {
+	public deleteTodo(listUuid: String, uid: String): void {/*
 		let items = this.data.find(d => d.uuid == listUuid).items;
 		let index = items.findIndex(value => value.uuid == uid);
 		if (index != -1) {
 			items.splice(index, 1);
-		}
+		}*/
 	}
 
-	public deleteList(listUuid: String): void {
+	public deleteList(listUuid: String): void {/*
 		let list = this.data.find(d => d.uuid == listUuid);
 		let index = this.data.findIndex(value => value.uuid == listUuid);
 		if (index != -1) {
 			this.data.splice(index, 1);
-		}
+		}*/
 	}
 
 	public addList(name: string, userId : string): void {
@@ -157,10 +158,15 @@ export class TodoProvider {
 			}
 		);
 		var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
+		var vardata = this.data;
+		this.getListByUid(newuuid).then((val) => {
+			console.log(val);
+			vardata.push(val);
+		});
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
 	}
 
-	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {
+	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {/*
 		let list = this.getListById(listUuid);
 		let index = this.data.findIndex(value => value.uuid === listUuid);
 		if (index != -1) {
@@ -170,7 +176,7 @@ export class TodoProvider {
 				complete: completed,
 				desc: description.toString(),
 			});
-		}
+		}*/
 	}
 
 	// Provided by Alban Bertolini
