@@ -2,7 +2,7 @@
 <ion-list cache-view="false">
     <ion-item-sliding *ngFor='let list of items'>
         <button ion-item (click)="pushPage(list)" >
-            <font size="5px">{{ list.name }}</font><font color="gray"> - {{ 'completed-label' | translate }} : {{ isCompleteCount(list.items)}} / {{ list.items.length }}</font>
+            <font size="5px">{{ list.name }}</font><font color="gray"> - {{ 'completed-label' | translate }} : {{ isCompleteCount(list.items)}} / {{ itemCount(list.items) }}</font>
         </button>
         <ion-item-options side='left'>
             <button ion-button (click)='deleteList(list.uuid)' color="danger">

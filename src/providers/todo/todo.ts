@@ -40,6 +40,7 @@ export class TodoProvider {
 				if(listsId) {
 					for(var id in listsId){
 						this.getListByUid(listsId[id]).then((val) => {
+							console.log(val);
 							lists.push(val);
 						});
 					}
@@ -80,19 +81,40 @@ export class TodoProvider {
 									if(!snap[list]['items']){
 										snap[list]['items'] = [];
 									}
+									else{
+										snap[list]['items'] = Object.keys(snap[list]['items']).map(function(itemindex){
+																						    					let item = snap[list]['items'][itemindex];
+																						    					return item;
+																												});
+									}
+									console.log(snap[list]);
 									resolve(snap[list]);
 									break;
 								}
 							}
 						});
 					});
+	}
 
-//					ref.once('value', (listSnapshot) => {
-						// TODO: test if list exists !
-	//					console.log("abc",listSnapshot.val()[0]);
-//						resolve(listSnapshot.val()[0]);
-//					});
-//				});
+	public getListIdByUid(uid: string) {
+			return new Promise((resolve, reject) => {
+						var url = `/lists/`;
+						var ref = this.firedatabase.database.ref(url);
+						ref.orderByChild("uuid").equalTo(uid);
+						ref.once('value').then((listSnapshot) => {
+							// TODO: test if list exists
+							var snap = listSnapshot.val();
+							for(var list in snap){
+								if (snap[list]['uuid'] == uid){
+									if(!snap[list]['items']){
+										snap[list]['items'] = [];
+									}
+									resolve(list);
+									break;
+								}
+							}
+						});
+					});
 	}
 
 	/**
@@ -107,14 +129,21 @@ export class TodoProvider {
 		return this.todoListPresenter(obsTodoLists);
 	}
 
+
 	public getTodos(uid: string): Observable<TodoItem[]> {
 		var todos = [];
+		var varthis = this;
+		var shhh;
 		this.getListByUid(uid).then((val) => {
-			val['items'].forEach((item) =>{
-				todos.push(item);
-			});
+			for(var key in val['items']){
+				todos.push(val['items'][key]);
+			}
+			shhh = val;
 		});
-		return Observable.of(todos);
+		 let list = this.data.find(d => d.uuid == uid);
+		 let index = this.data.findIndex(value => value.uuid === uid);
+		 this.data[index].items = todos;
+		return Observable.of(this.data[index].items);
 	}
 
 	public editTodo(listUuid: String, editedItem: TodoItem): void {/*
@@ -160,24 +189,44 @@ export class TodoProvider {
 		var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
 		var vardata = this.data;
 		this.getListByUid(newuuid).then((val) => {
-			console.log(val);
 			vardata.push(val);
 		});
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
 	}
 
-	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {/*
-		let list = this.getListById(listUuid);
-		let index = this.data.findIndex(value => value.uuid === listUuid);
-		if (index != -1) {
-			this.data[index].items.push({
-				uuid: uuid(),
-				name: itemName.toString(),
-				complete: completed,
-				desc: description.toString(),
-			});
-		}*/
+	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {
+		var varthis = this;
+		var newuuid = uuid();
+		this.getListIdByUid(listUuid).then((listid) => {
+			var newTodo = this.firedatabase.list(`/lists/${listid}/items`).push('{}');
+			newTodo.set({
+					uuid: newuuid,
+					name: itemName.toString(),
+					complete: completed,
+					desc: description.toString(),
+				});
+		});
+		 this.getListByUid(listUuid).then((val) => {
+		 let list = varthis.data.find(d => d.uuid == val.uuid);
+		 let index = varthis.data.findIndex(value => value.uuid === listUuid);
+		 if (index != -1) {
+		 		varthis.data[index].items.push(val.items[newuuid]);
+		 	}
+		 });
+		 let list = this.data.find(d => d.uuid == listUuid);
+		 let index = this.data.findIndex(value => value.uuid === listUuid);
+		// if (index != -1) {
+		// 		this.data[index].items.push({
+		// 				uuid: newuuid,
+		// 				name: itemName.toString(),
+		// 				complete: completed,
+		// 				desc: description.toString(),
+		// 			});
+		// 	}
+		 	console.log(this.data[index]);
+
 	}
+
 
 	// Provided by Alban Bertolini
 	private todoListPresenter(todoList) {
