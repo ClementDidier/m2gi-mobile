@@ -43,10 +43,18 @@ export class TodoListComponent {
      */
     public isCompleteCount(items : TodoItem[]) {
         let result = 0;
-        items.forEach((i) => {
-            if (i.complete)
+        for(var keyitem in items){
+            if (items[keyitem].complete)
                 result++;
-        });
+        }
+        return result;
+    }
+
+    public itemCount(items : TodoItem[]) {
+        let result = 0;
+        for(var keyitem in items){
+            result++;
+        }
         return result;
     }
 
