@@ -31,7 +31,14 @@
     "connection-success-modal-title": "Connection",
     "task-list-label-caption": "Your tasks lists",
     "todos-list-label-caption": "Your tasks",
+    "list-name-label-caption": "List's name",
     "home-tab-caption": "Home",
     "about-tab-caption": "About",
-    "profil-tab-caption": "Profil"
+    "profil-tab-caption": "Profil",
+    "forgotten-password-label-caption": "Forgotten password ?",
+    "reset-error-modal-title": "Error",
+    "reset-error-modal-content": "An error occur. Details : ",
+    "reset-ok-modal-title": "Success",
+    "reset-ok-modal-content": "Reinitialisation mail sended to mail address.",
+    "adding-list-modal-title": "Adding new list"
 }

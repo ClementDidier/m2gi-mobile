@@ -32,7 +32,7 @@ export class LoggerProvider {
         this.fireauth.authState.subscribe(res => {
             if (res && res.uid) {
                 this.userProfile = res;
-                this.displayName = res.displayName;
+                this.displayName = res.displayName ? res.displayName : res.email;
                 this.events.publish('user:connected', this.userProfile);
             } else {
                 this.userProfile = null;
@@ -110,5 +110,19 @@ export class LoggerProvider {
 
     public onSelectChange(selectedLang: any): void {
         this.translate.use(selectedLang);
+    }
+
+    /**
+     * Envoi un mail de reinitialisation de mot de passe
+     */
+    public resetPassword(emailAddress): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            var auth = this.fireauth.auth;
+            auth.sendPasswordResetEmail(emailAddress).then(() => {
+                resolve(true);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
     }
 }
