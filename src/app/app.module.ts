@@ -25,6 +25,7 @@ import { AlertController } from 'ionic-angular';
 import { LoggerProvider } from '../providers/logger/logger';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { TodoFormPage } from '../pages/todo-form/todo-form';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
         TabsPage,
         ListPage,
         LoginPage,
-        ListFormPage
+        ListFormPage,
+        TodoFormPage
     ],
     imports: [
         BrowserModule,
@@ -62,7 +64,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
         TabsPage,
         ListPage,
         LoginPage,
-        ListFormPage
+        ListFormPage,
+        TodoFormPage
     ],
     providers: [
         StatusBar,

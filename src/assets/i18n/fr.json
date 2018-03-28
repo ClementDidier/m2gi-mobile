@@ -7,6 +7,7 @@
     "sample-connexion-success-message" : "Connecté avec succés à l'application ionic-todo !",
     "sample-connexion-failed-message" : "Une erreur est survenue lors de la tentative de connection au serveur ionic-todo.",
     "disconnection-button-caption" : "SE DECONNECTER",
+
     "remove-button-caption": "Supprimer",
     "add-button-caption": "Ajouter",
     "edit-button-caption": "Editer",
@@ -18,23 +19,30 @@
     "password-label": "Mot de passe",
     "completed-label": "Complétée",
     "return-label": "Retour",
+
     "removing-confirmation-modal-title": "Confirmation de suppression",
     "removing-confirmation-modal-content": "Êtes vous sûr de vouloir supprimer cet élément ?",
     "adding-element-modal-title": "Ajouter un nouvel élément",
     "adding-element-modal-content": "Entrez les informations que vous souhaitez ajouter à la liste",
+    "task-name-label-caption": "Nom de la tâche",
+    "task-desc-label-caption": "Description de la tâche",
     "editing-element-modal-title": "Modifier l'élément",
     "editing-element-modal-content": "Modifiez les informations de l'élément de la liste",
+
     "fr": "Français",
     "gb": "Anglais",
     "hello": "Bonjour",
+
     "connection-error-modal-title": "Erreur de connexion",
     "connection-success-modal-title": "Connexion",
     "list-name-label-caption": "Nom de la liste",
     "task-list-label-caption": "Vos listes de tâches",
     "todos-list-label-caption": "Vos tâches",
+
     "home-tab-caption": "Accueil",
     "about-tab-caption": "À propos",
     "profil-tab-caption": "Profil",
+    
     "forgotten-password-label-caption": "Mot de passe oublié ?",
     "reset-error-modal-title": "Erreur tentative",
     "reset-error-modal-content": "Une erreur est survenue. Détails : ",
