@@ -29,6 +29,7 @@
     "hello": "Bonjour",
     "connection-error-modal-title": "Erreur de connexion",
     "connection-success-modal-title": "Connexion",
+    "list-name-label-caption": "Nom de la liste",
     "task-list-label-caption": "Vos listes de tâches",
     "todos-list-label-caption": "Vos tâches",
     "home-tab-caption": "Accueil",
@@ -38,5 +39,6 @@
     "reset-error-modal-title": "Erreur tentative",
     "reset-error-modal-content": "Une erreur est survenue. Détails : ",
     "reset-ok-modal-title": "Succés",
-    "reset-ok-modal-content": "Un email de reinitialisation a été envoyé à l'adresse mail."
+    "reset-ok-modal-content": "Un email de reinitialisation a été envoyé à l'adresse mail.",
+    "adding-list-modal-title": "Ajouter nouvelle liste"
 }

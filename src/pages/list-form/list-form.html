@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>Liste</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="background: url(assets/imgs/bglogin.jpg) center; background-size: cover;">
+  <ion-card>
+      <ion-card-header>
+          <ion-label>
+              <ion-icon name="list-box" item-start>
+              {{ 'adding-list-modal-title' | translate }}
+              </ion-icon>
+          </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+            <ion-label floating>{{ 'list-name-label-caption' | translate }}</ion-label>
+            <ion-input highlight-color="balanced" type="text" [(ngModel)]="listname"></ion-input>
+        </ion-item>
+        <ion-buttons end>
+          <button ion-button (click)="addList()" icon-start>
+            <ion-icon name="add-circle"></ion-icon>
+            {{ 'valid-button-caption' | translate }}
+          </button>
+        </ion-buttons>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

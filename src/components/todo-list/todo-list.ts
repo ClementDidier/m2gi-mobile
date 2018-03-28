@@ -4,6 +4,7 @@ import { TodoProvider } from '../../providers/todo/todo';
 import { TodoItem } from '../../model/todo-item.model';
 import { TodoList } from '../../model/todo-list.model';
 import { ListPage } from '../../pages/list/list';
+import { ListFormPage } from '../../pages/list-form/list-form';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { LoggerProvider } from '../../providers/logger/logger';
@@ -92,30 +93,9 @@ export class TodoListComponent {
      * Affiche le formulaire d'ajout d'une nouvelle liste de tâches
      */
     private addList() {
-        this.alertCtrl.create({
-            title: 'Ajouter une liste',
-            message: 'Entrez un nom pour cette liste :',
-            inputs: [
-                {
-                    name: 'listname',
-                    placeholder: 'List name'
-                },
-            ] ,
-            buttons: [
-                {
-                    text: 'Annuler',
-                    role: 'cancel',
-                },
-                {
-                    text: 'Valider',
-                    handler: (data) => {
-                        this.todoService.addList(data.listname, this.logger.getUserId());
-                        this.todoService.getListsOfUser(this.logger.getUserId());
-
-                    }
-                }
-            ]
-        }).present();
+        this.navCtrl.push(ListFormPage);
+        this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
+        this.subscriber.subscribe(items => this.items = items);
     }
 
     /**

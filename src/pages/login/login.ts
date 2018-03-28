@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+
 import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoggerProvider } from '../../providers/logger/logger';
