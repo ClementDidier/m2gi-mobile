@@ -4,30 +4,23 @@ import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoggerProvider } from '../../providers/logger/logger';
 import { TodoProvider } from '../../providers/todo/todo';
+import { TodoItem } from '../../model/todo-item.model';
 
 @Component({
-  selector: 'page-todo-form',
-  templateUrl: 'todo-form.html',
+  selector: 'page-todo-view',
+  templateUrl: 'todo-view.html',
 })
-export class TodoFormPage {
+export class TodoViewPage {
 
-	private listUID: string;
-	private taskname: string;
-	private taskdesc: string;
+	public item: any;
 
 	constructor(private translate: TranslateService, private logger: LoggerProvider, private totoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
-		this.listUID = this.navParams.get('uid');
+		var todo = this.navParams.get('todo');
+		this.item = { name: todo.name || "???", desc: todo.desc || "" };
 	}
 
 	ionViewDidLoad() {
 		// nothing
-	}
-
-	addTask(): void {
-		if(this.taskname) {
-			this.totoProvider.addTodo(this.listUID, this.taskname, false, this.taskdesc);
-			this.navCtrl.pop();
-		}
 	}
 
 	returnPrecPage(): void {

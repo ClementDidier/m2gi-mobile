@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 import { TodoFormPage } from '../todo-form/todo-form';
+import { reorderArray } from 'ionic-angular';
 
 /**
 * Generated class for the ListPage page.
@@ -148,5 +149,11 @@ export class ListPage {
         }).catch((error: any) => {
             console.log('geolocate error:', error);
         });
+    }
+
+    private reorderItems(indexes): void {
+        console.log("pages.list.reorderItems", indexes);
+        this.list.items = reorderArray(this.list.items, indexes);
+        // TODO: Save in database reorder
     }
 }

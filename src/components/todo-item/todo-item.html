@@ -4,7 +4,7 @@
       <ion-col>
           <ion-checkbox item-left checked={{todo.complete}}></ion-checkbox>
       </ion-col>
-      <ion-col col-auto>
+      <ion-col col-auto (click)="showTask()">
           <h2>{{ todo.name }}</h2>
           <p *ngIf="todo.desc">{{ todo.desc }}</p>
       </ion-col>

@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TodoItem } from '../../model/todo-item.model';
+import { NavController } from 'ionic-angular';
+import { TodoViewPage } from '../../pages/todo-view/todo-view';
 
 /**
 * Generated class for the TodoItemComponent component.
@@ -16,7 +18,11 @@ export class TodoItemComponent {
     @Input()
     public todo: TodoItem;
 
-    constructor() {
+    constructor(private navCtrl: NavController) {
         // nothing
+    }
+
+    public showTask(): void {
+        this.navCtrl.push(TodoViewPage, { todo: this.todo });
     }
 }

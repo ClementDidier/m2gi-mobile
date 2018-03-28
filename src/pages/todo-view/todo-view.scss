@@ -1,0 +1,16 @@
+page-todo-view {
+    .button {
+        margin-top: 50px;
+    }
+
+    .label-md[stacked], .label-md[floating] {
+        margin-left: 0;
+        margin-bottom: 0;
+        margin-top: -20px;
+    }
+
+    #desc-lbl {
+        color: #888888;
+        margin-bottom: 10px;
+    }
+}

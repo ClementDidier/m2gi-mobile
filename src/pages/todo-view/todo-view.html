@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>Task</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="background: url(assets/imgs/bglogin.jpg) center; background-size: cover;">
+  <ion-card>
+      <ion-card-header>
+          <ion-label>
+              <ion-icon name="list-box" item-start>
+              {{ item?.name }}
+              </ion-icon>
+          </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label id="desc-lbl" floating>{{ 'task-desc-label-caption' | translate }}</ion-label>
+          <ion-label margin-top="5px">{{ item.desc }}</ion-label>
+        </ion-item>
+        <ion-buttons end>
+          <button ion-button color="light" (click)='returnPrecPage()'>
+              <ion-icon name="return-left">
+              {{ 'return-label' | translate }}
+              </ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

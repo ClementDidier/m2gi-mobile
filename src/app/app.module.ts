@@ -26,6 +26,7 @@ import { LoggerProvider } from '../providers/logger/logger';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { TodoFormPage } from '../pages/todo-form/todo-form';
+import { TodoViewPage } from '../pages/todo-view/todo-view';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { TodoFormPage } from '../pages/todo-form/todo-form';
         ListPage,
         LoginPage,
         ListFormPage,
-        TodoFormPage
+        TodoFormPage,
+        TodoViewPage
     ],
     imports: [
         BrowserModule,
@@ -65,7 +67,8 @@ import { TodoFormPage } from '../pages/todo-form/todo-form';
         ListPage,
         LoginPage,
         ListFormPage,
-        TodoFormPage
+        TodoFormPage,
+        TodoViewPage
     ],
     providers: [
         StatusBar,
