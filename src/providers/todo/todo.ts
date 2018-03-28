@@ -129,7 +129,25 @@ export class TodoProvider {
 		return this.todoListPresenter(obsTodoLists);
 	}
 
-
+	public getTodoIdByUid(listUid: string, todoUid :string) : any {
+			return new Promise((resolve, reject) => {
+						this.getListIdByUid(listUid).then((listId) => {
+							var url = `/lists/${listId}/items`;
+							var ref = this.firedatabase.database.ref(url);
+							ref.orderByChild("uuid").equalTo(todoUid);
+							ref.once('value').then((listSnapshot) => {
+								// TODO: test if list exists
+								var snap = listSnapshot.val();
+								for(var key in snap){
+									if (snap[key]['uuid'] == todoUid){
+										resolve(key);
+										break;
+									}
+								}
+							});
+						});
+					});
+	}
 	public getTodos(uid: string): Observable<TodoItem[]> {
 		var todos = [];
 		var varthis = this;
@@ -146,10 +164,21 @@ export class TodoProvider {
 		return Observable.of(this.data[index].items);
 	}
 
-	public editTodo(listUuid: String, editedItem: TodoItem): void {/*
+	public editTodo(listUuid: string, editedItem: TodoItem): void {
+		var varthis = this;
+		var todoId;
+		this.getTodoIdByUid(listUuid, editedItem.uuid).then((itemid)=> {
+			varthis.getListIdByUid(listUuid).then((listid)=>{
+				var baseitem = varthis.firedatabase.list(`/lists/${listid}/items/`);
+				baseitem.update(itemid, editedItem);
+				for(var key in editedItem){
+				}
+			})
+		});
+
 		let items = this.data.find(d => d.uuid == listUuid).items;
 		let index = items.findIndex(value => value.uuid == editedItem.uuid);
-		items[index] = editedItem;*/
+		items[index] = editedItem;
 	}
 
 	public editList(listUuid: String, listName: String): void {/*
