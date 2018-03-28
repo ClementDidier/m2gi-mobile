@@ -6,23 +6,27 @@ import { LoggerProvider } from '../../providers/logger/logger';
 import { TodoProvider } from '../../providers/todo/todo';
 
 @Component({
-  selector: 'page-list-form',
-  templateUrl: 'list-form.html',
+  selector: 'page-todo-form',
+  templateUrl: 'todo-form.html',
 })
-export class ListFormPage {
+export class TodoFormPage {
 
-	private listname: string;
+	private listUID: string;
+	private taskname: string;
+	private taskdesc: string;
 
 	constructor(private translate: TranslateService, private logger: LoggerProvider, private totoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
+		var uuid = this.navParams.get('uid');
+		console.log(uuid);
 	}
 
 	ionViewDidLoad() {
 		// nothing
 	}
 
-	addList(): void {
-		if(this.listname) {
-			this.totoProvider.addList(this.listname, this.logger.getUserId());
+	addTask(): void {
+		if(this.taskname) {
+			this.totoProvider.addTodo(this.listUID, this.taskname, false, this.taskdesc);
 			this.navCtrl.pop();
 		}
 	}

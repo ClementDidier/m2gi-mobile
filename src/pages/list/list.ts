@@ -9,6 +9,7 @@ import { LoggerProvider } from '../../providers/logger/logger';
 import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
+import { TodoFormPage } from '../todo-form/todo-form';
 
 /**
 * Generated class for the ListPage page.
@@ -88,40 +89,10 @@ export class ListPage {
     }
 
     /**
-     * Affiche un popup utilisateur, d'ajout d'une nouvelle tâche pour la liste courante
+     * Affiche un formulaire d'ajout d'une nouvelle tâche pour la liste courante
      */
     private addItem() {
-        this.alertCtrl.create({
-            title: this.translate.instant('adding-element-modal-title'),
-            message: this.translate.instant('adding-element-modal-content') + ' ' + this.list.name + '.',
-            inputs: [
-                {
-                    name: 'name',
-                    placeholder: 'Item name'
-                },
-                {
-                    name: 'desc',
-                    placeholder: 'Item description'
-                },
-                {
-                    name: 'completed',
-                    type: 'checkbox',
-                    label: 'Is completed ?'
-                },
-            ] ,
-            buttons: [
-                {
-                    text: this.translate.instant('cancel-button-caption'),
-                    role: 'cancel'
-                },
-                {
-                    text: this.translate.instant('valid-button-caption'),
-                    handler: data => {
-                        this.todoService.addTodo(this.list.uuid, data.name, data.completed, data.desc);
-                    }
-                }
-            ]
-        }).present();
+        this.navCtrl.push(TodoFormPage, { uid: this.list.uuid });
     }
 
     /**

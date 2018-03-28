@@ -9,14 +9,18 @@
       <ion-card-header>
           <ion-label>
               <ion-icon name="list-box" item-start>
-              {{ 'adding-list-modal-title' | translate }}
+              {{ 'adding-element-modal-title' | translate }}
               </ion-icon>
           </ion-label>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-            <ion-label floating>{{ 'list-name-label-caption' | translate }}</ion-label>
-            <ion-input highlight-color="balanced" type="text" [(ngModel)]="listname"></ion-input>
+            <ion-label floating>{{ 'task-name-label-caption' | translate }}</ion-label>
+            <ion-input highlight-color="balanced" type="text" [(ngModel)]="taskname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{ 'task-desc-label-caption' | translate }}</ion-label>
+          <ion-input highlight-color="balanced" type="text" [(ngModel)]="taskdesc"></ion-input>
         </ion-item>
         <ion-buttons end>
           <button ion-button color="light" (click)='returnPrecPage()'>
@@ -24,7 +28,7 @@
               {{ 'return-label' | translate }}
               </ion-icon>
           </button>
-          <button ion-button (click)="addList()" icon-start>
+          <button ion-button (click)="addTask()" icon-start>
             <ion-icon name="add-circle"></ion-icon>
             {{ 'add-button-caption' | translate }}
           </button>

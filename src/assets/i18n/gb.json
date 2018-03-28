@@ -18,23 +18,30 @@
     "password-label": "Password",
     "completed-label": "Completed",
     "return-label": "Return",
+
     "removing-confirmation-modal-title": "Confirm remove task",
     "removing-confirmation-modal-content": "Are you sure to remove this element ?",
     "adding-element-modal-title": "Add new element",
     "adding-element-modal-content": "Type information you want add in list",
     "editing-element-modal-title": "Edit element",
+    "task-name-label-caption": "Task's name",
+    "task-desc-label-caption": "Task's description",
     "editing-element-modal-content": "Edit information of the element in the list",
+
     "fr": "French",
     "gb": "English",
     "hello": "Hello",
+
     "connection-error-modal-title": "Connection error",
     "connection-success-modal-title": "Connection",
     "task-list-label-caption": "Your tasks lists",
     "todos-list-label-caption": "Your tasks",
     "list-name-label-caption": "List's name",
+
     "home-tab-caption": "Home",
     "about-tab-caption": "About",
     "profil-tab-caption": "Profil",
+
     "forgotten-password-label-caption": "Forgotten password ?",
     "reset-error-modal-title": "Error",
     "reset-error-modal-content": "An error occur. Details : ",
