@@ -96,7 +96,7 @@ export class TodoProvider {
 					});
 	}
 
-	public getListIdByUid(uid: string) {
+	public getListIdByUid(uid: string) : any {
 			return new Promise((resolve, reject) => {
 						var url = `/lists/`;
 						var ref = this.firedatabase.database.ref(url);
@@ -128,8 +128,8 @@ export class TodoProvider {
 		var angularDataList = this.firedatabase.list('/lists');
 		return this.todoListPresenter(obsTodoLists);
 	}
-
 	public getTodoIdByUid(listUid: string, todoUid :string) : any {
+
 			return new Promise((resolve, reject) => {
 						this.getListIdByUid(listUid).then((listId) => {
 							var url = `/lists/${listId}/items`;
@@ -171,17 +171,18 @@ export class TodoProvider {
 			varthis.getListIdByUid(listUuid).then((listid)=>{
 				var baseitem = varthis.firedatabase.list(`/lists/${listid}/items/`);
 				baseitem.update(itemid, editedItem);
-				for(var key in editedItem){
-				}
-			})
+				varthis.getTodos(listUuid);
+			});
 		});
-
-		let items = this.data.find(d => d.uuid == listUuid).items;
-		let index = items.findIndex(value => value.uuid == editedItem.uuid);
-		items[index] = editedItem;
 	}
 
-	public editList(listUuid: String, listName: String): void {/*
+	public editList(listUuid: string, listName: string): void {
+		this.getListIdByUid(listUuid).then((listid)=>{
+			var baseitem = this.firedatabase.list(`/lists/`);
+			baseitem.update(listid, {'name' : listName});
+			this.getListsOfUser(this.logger.getUserId());
+		});
+		/*
 		let list = this.data.find(d => d.uuid == listUuid);
 		let index = this.data.findIndex(value => value.uuid == listUuid);
 		if (index != -1) {
@@ -245,14 +246,6 @@ export class TodoProvider {
 
 		 let list = this.data.find(d => d.uuid == listUuid);
 		 let index = this.data.findIndex(value => value.uuid === listUuid);
-		// if (index != -1) {
-		// 		this.data[index].items.push({
-		// 				uuid: newuuid,
-		// 				name: itemName.toString(),
-		// 				complete: completed,
-		// 				desc: description.toString(),
-		// 			});
-		// 	}
 	}
 
 
