@@ -67,7 +67,31 @@ export class LoginPage {
         }
     }
 
+    /**
+     * Déconnecte la session courante
+     */
     public logOut(): void {
         this.logger.logOut();
+    }
+
+    /**
+     * Envoi une demande de confirmation pour reinitialiser le mot de passe
+     */
+    public forgotPassword(): void {
+        if(this.email && this.email.length > 0) {
+            this.logger.resetPassword(this.email).then(() => {
+                this.alert.create({
+                    title: this.translate.instant('reset-ok-modal-title'),
+                    subTitle: this.translate.instant('reset-ok-modal-content'),
+                    buttons: ['OK']
+                }).present();
+            }).catch((err) => {
+                this.alert.create({
+                    title: this.translate.instant('reset-error-modal-title'),
+                    subTitle: this.translate.instant('reset-error-modal-content') + err,
+                    buttons: ['OK']
+                }).present();
+            });
+        } 
     }
 }

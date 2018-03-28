@@ -13,7 +13,13 @@ page-login {
         text-align: center;
         color: white;
     }
+
     button{
         width: 100%;
+    }
+
+    #forgotPwdLabel {
+        color: rgb(67, 86, 160);
+        margin-top: 20px;
     }
 }

@@ -33,5 +33,10 @@
     "todos-list-label-caption": "Vos tâches",
     "home-tab-caption": "Accueil",
     "about-tab-caption": "À propos",
-    "profil-tab-caption": "Profil"
+    "profil-tab-caption": "Profil",
+    "forgotten-password-label-caption": "Mot de passe oublié ?",
+    "reset-error-modal-title": "Erreur tentative",
+    "reset-error-modal-content": "Une erreur est survenue. Détails : ",
+    "reset-ok-modal-title": "Succés",
+    "reset-ok-modal-content": "Un email de reinitialisation a été envoyé à l'adresse mail."
 }
