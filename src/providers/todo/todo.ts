@@ -205,14 +205,15 @@ export class TodoProvider {
 					complete: completed,
 					desc: description.toString(),
 				});
+				varthis.getListByUid(listUuid).then((val) => {
+					let list = varthis.data.find(d => d.uuid == val.uuid);
+					let index = varthis.data.findIndex(value => value.uuid === listUuid);
+					if (index != -1) {
+						 	varthis.data[index].items.push(val.items.find(d => d.uuid == newuuid));
+					}
+				});
 		});
-		 this.getListByUid(listUuid).then((val) => {
-		 let list = varthis.data.find(d => d.uuid == val.uuid);
-		 let index = varthis.data.findIndex(value => value.uuid === listUuid);
-		 if (index != -1) {
-		 		varthis.data[index].items.push(val.items[newuuid]);
-		 	}
-		 });
+
 		 let list = this.data.find(d => d.uuid == listUuid);
 		 let index = this.data.findIndex(value => value.uuid === listUuid);
 		// if (index != -1) {
@@ -223,8 +224,6 @@ export class TodoProvider {
 		// 				desc: description.toString(),
 		// 			});
 		// 	}
-		 	console.log(this.data[index]);
-
 	}
 
 
