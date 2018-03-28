@@ -25,7 +25,7 @@ export class TodoFormPage {
 
 	addTask(): void {
 		if(this.taskname) {
-			this.totoProvider.addTodo(this.listUID, this.taskname, false, this.taskdesc);
+			this.totoProvider.addTodo(this.listUID, this.taskname || "???", false, this.taskdesc || "");
 			this.navCtrl.pop();
 		}
 	}

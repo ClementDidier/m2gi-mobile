@@ -6,7 +6,7 @@ import { TodoList } from '../../model/todo-list.model';
 import { ListPage } from '../../pages/list/list';
 import { ListFormPage } from '../../pages/list-form/list-form';
 import { TranslateService } from '@ngx-translate/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, reorderArray } from 'ionic-angular';
 import { LoggerProvider } from '../../providers/logger/logger';
 
 /**
@@ -134,5 +134,11 @@ export class TodoListComponent {
                 }
             ]
         }).present();
+    }
+
+    private reorderItems(indexes): void {
+        console.log("pages.list.reorderItems", indexes);
+        this.items = reorderArray(this.items, indexes);
+        // TODO: Save in database reorder
     }
 }
