@@ -86,7 +86,7 @@ export class LoggerProvider {
                 offline: true
             }).then(res => {
                 const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-                this.fireauth.auth.signInWithCredential(firecreds).then((result) => {
+                firebase.auth().signInWithCredential(firecreds).then((result) => {
                     resolve(result);
                 }).catch((err) => {
                     reject(err);
