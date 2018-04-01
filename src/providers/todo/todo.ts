@@ -210,7 +210,18 @@ export class TodoProvider {
 		}*/
 	}
 
-	public deleteTodo(listUuid: String, uid: String): void {/*
+	public deleteTodo(listUuid: string, todouid: string): void {
+		var varthis = this;
+		var todoId;
+		this.getTodoIdByUid(listUuid, todouid).then((itemid) => {
+			varthis.getListIdByUid(listUuid).then((listid) => {
+				var baseitem = varthis.firedatabase.list(`/lists/${listid}/items/${itemid}`);
+				baseitem.remove();
+				varthis.getTodos(listUuid);
+			});
+		});
+
+		/*
 		let items = this.data.find(d => d.uuid == listUuid).items;
 		let index = items.findIndex(value => value.uuid == uid);
 		if (index != -1) {
@@ -218,7 +229,14 @@ export class TodoProvider {
 		}*/
 	}
 
-	public deleteList(listUuid: String): void {/*
+	public deleteList(listUuid: string): void {
+		this.getListIdByUid(listUuid).then((listid) => {
+			var baseitem = this.firedatabase.list(`/lists/${listid}`);
+			baseitem.remove();
+			//TODO: remove la liste des users
+			this.getListsOfUser(this.logger.getUserId());
+		});
+		/*
 		let list = this.data.find(d => d.uuid == listUuid);
 		let index = this.data.findIndex(value => value.uuid == listUuid);
 		if (index != -1) {
