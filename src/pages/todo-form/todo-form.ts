@@ -25,7 +25,9 @@ export class TodoFormPage {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
+    mediaType: this.camera.MediaType.PICTURE,
+    targetWidth: 700,
+    targetHeight:700,
   };
 
 	ionViewDidLoad() {
