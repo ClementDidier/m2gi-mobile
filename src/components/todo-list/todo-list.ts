@@ -8,6 +8,7 @@ import { ListFormPage } from '../../pages/list-form/list-form';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, AlertController, reorderArray } from 'ionic-angular';
 import { LoggerProvider } from '../../providers/logger/logger';
+import { SharePage } from '../../pages/share/share';
 
 /**
 * Generated class for the TodoListComponent component.
@@ -24,13 +25,11 @@ export class TodoListComponent {
     private subscriber: Observable<TodoList[]>;
     private items: TodoList[] = [];
 
-    constructor(public todoService: TodoProvider,
-         public navCtrl: NavController,
-         private alertCtrl: AlertController,
-         private translate: TranslateService,
-         private logger: LoggerProvider) {
-           this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
-           this.subscriber.subscribe(items => this.items = items);
+    constructor(public todoService: TodoProvider, public navCtrl: NavController, private alertCtrl: AlertController, private translate: TranslateService, private logger: LoggerProvider) {
+        this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
+        this.subscriber.subscribe(items => {
+            this.items = items;
+        });
     }
 
     private ionViewDidLoad() {
@@ -103,7 +102,17 @@ export class TodoListComponent {
     private addList() {
         this.navCtrl.push(ListFormPage);
         this.subscriber = this.todoService.getListsOfUser(this.logger.getUserId());
-        this.subscriber.subscribe(items => this.items = items);
+        this.subscriber.subscribe(items => {
+            this.items = items;
+        });
+    }
+
+    /**
+     * Ouvre la page de partage de liste entre utilisateur
+     * @param list La liste à partager
+     */
+    private shareList(list: TodoList): void {
+        this.navCtrl.push(SharePage, { 'list': list });
     }
 
     /**
@@ -140,5 +149,10 @@ export class TodoListComponent {
         console.log("pages.list.reorderItems", indexes);
         this.items = reorderArray(this.items, indexes);
         // TODO: Save in database reorder
+
+        var list1 = this.items[indexes.from];
+        var list2 = this.items[indexes.to];
+        
+        this.todoService.swapListsIndexes(list1, list2);
     }
 }

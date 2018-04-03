@@ -15,11 +15,8 @@ export class LoginPage {
     private email: string;
     private password: string;
 
-    constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private translate: TranslateService,
-        private alert: AlertController,
-        private logger: LoggerProvider) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private alert: AlertController, private logger: LoggerProvider) {
+        // nothing
     }
 
     public ionViewDidLoad(): void {

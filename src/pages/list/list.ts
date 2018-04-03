@@ -40,12 +40,15 @@ export class ListPage {
         var name = this.navParams.get('name');
 
         this.list = {
+            index: 0,
             uuid: uuid,
             name: name,
             items: [],
             geoloc: ''
         };
-        this.todoService.getTodos(uuid).subscribe(todoItems => this.list.items = todoItems);
+        this.todoService.getTodos(uuid).subscribe(todoItems => {
+            this.list.items = todoItems;
+        });
     }
 
     private ionViewDidLoad() {

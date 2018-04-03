@@ -27,6 +27,21 @@ export class TodoProvider {
 		// nothing
 	}
 
+	public getUsersEmail(): Promise<string[]> {
+		return new Promise((resolve, reject) => {
+			var users = [];
+			var url = '/users/';
+			var ref = this.firedatabase.database.ref(url);
+			ref.once('value', (list) => {
+				var usrs = list.val();
+				usrs.forEach(u => {
+					users.push(u.email || 'private@address.com');
+				});
+				resolve(users);
+			});
+		});
+	}
+
 	/**
 	 * Obtient l'ensemble des listes de l'utilisateur spécifié
 	 * @param userId L'identifiant de l'utilisateur pour lequel les listes doivent être récupérées
@@ -40,7 +55,7 @@ export class TodoProvider {
 			if (listsId) {
 				for (var id in listsId) {
 					this.getListByUid(listsId[id]).then((val) => {
-						console.log(val);
+						console.log('getListsOfUser', val);
 						lists.push(val);
 					});
 				}
@@ -87,7 +102,6 @@ export class TodoProvider {
 								return item;
 							});
 						}
-						console.log(snap[list]);
 						resolve(snap[list]);
 						break;
 					}
@@ -115,18 +129,6 @@ export class TodoProvider {
 				}
 			});
 		});
-	}
-
-	/**
-	* @deprecated
-	**/
-	public getList(): Observable<TodoList[]> {
-		var uid = this.logger.getUserId();
-		var user = this.firedatabase.list(`/users/${uid}`);
-		var obsListID = this.firedatabase.list(`/users/${uid}/lists`);
-		var obsTodoLists = combineLatest(obsListID.snapshotChanges().map(lID => this.firedatabase.list(`lists/${lID}`).snapshotChanges()));
-		var angularDataList = this.firedatabase.list('/lists');
-		return this.todoListPresenter(obsTodoLists);
 	}
 
 	/**
@@ -210,6 +212,18 @@ export class TodoProvider {
 		}*/
 	}
 
+	public swapListsIndexes(list1: TodoList, list2: TodoList): void {
+		var baseitem = this.firedatabase.list(`/lists/`);
+		var lid1, lid2;
+		Promise.all([this.getListIdByUid(list1.uuid), this.getListIdByUid(list2.uuid)]).then(([lid1, lid2]) => {
+			var index = list1.index;
+			baseitem.update(lid1, { 'index': list2.index });
+			baseitem.update(lid2, { 'index': index });
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
+
 	public deleteTodo(listUuid: string, todouid: string): void {
 		var varthis = this;
 		var todoId;
@@ -250,21 +264,40 @@ export class TodoProvider {
 	 * @param userId L'identifiant de l'utilisateur propriétaire
 	 */
 	public addList(name: string, userId: string): void {
+		
 		var newList = this.firedatabase.list('/lists').push('{}');
-		var newuuid = uuid();
-		newList.set(
-			{
-				uuid: newuuid,
-				name: name.toString(),
-				items: []
-			}
-		);
-		var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
-		var vardata = this.data;
-		this.getListByUid(newuuid).then((val) => {
-			vardata.push(val);
+		this.getNewListIndex().then((i) => {
+			console.log('index', i);
+			var newuuid = uuid();
+			newList.set(
+				{
+					index: i,
+					uuid: newuuid,
+					name: name.toString(),
+					items: []
+				}
+			);
+			var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
+			var vardata = this.data;
+			this.getListByUid(newuuid).then((val) => {
+				vardata.push(val);
+			});
+		}).catch((error) => {
+			console.error(error);
 		});
+		
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
+	}
+
+	getNewListIndex(): Promise<number> {
+		return new Promise((resolve, reject) => {
+			var ref = this.firedatabase.database.ref('/lists');
+			ref.once("value", (snapshot) => {
+				resolve(snapshot.numChildren());
+			}, (error) => {
+				reject(error);
+			});
+		});
 	}
 
 	/**
@@ -296,29 +329,5 @@ export class TodoProvider {
 
 		let list = this.data.find(d => d.uuid == listUuid);
 		let index = this.data.findIndex(value => value.uuid === listUuid);
-	}
-
-
-	// Provided by Alban Bertolini
-	private todoListPresenter(todoList) {
-		return todoList.map(changes => {
-			return changes.map(c => ({
-				uuid: c.payload.key,
-				...c.payload.val(),
-				items: this.itemsPresenter(c.payload.val().items)
-			}));
-		});
-	}
-
-	public itemsPresenter(items) {
-		if (!items) { return []; }
-
-		return Object.keys(items).map((key) => {
-			const item = items[key];
-			return {
-				uuid: key,
-				...item
-			};
-		});
 	}
 }

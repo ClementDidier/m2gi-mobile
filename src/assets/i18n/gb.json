@@ -47,5 +47,9 @@
     "reset-error-modal-content": "An error occur. Details : ",
     "reset-ok-modal-title": "Success",
     "reset-ok-modal-content": "Reinitialisation mail sended to mail address.",
-    "adding-list-modal-title": "Adding new list"
+    "adding-list-modal-title": "Adding new list",
+    "share-button-caption": "Share",
+    "contact-mail-address": "Contact mail address",
+    "share-success-modal-content": "Shared with success !",
+    "share-fail-modal-content": "An error occurred while trying to share. The email address may not refer to a registered user."
 }

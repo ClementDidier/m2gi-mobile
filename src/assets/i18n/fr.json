@@ -48,5 +48,9 @@
     "reset-error-modal-content": "Une erreur est survenue. Détails : ",
     "reset-ok-modal-title": "Succés",
     "reset-ok-modal-content": "Un email de reinitialisation a été envoyé à l'adresse mail.",
-    "adding-list-modal-title": "Ajouter nouvelle liste"
+    "adding-list-modal-title": "Ajouter nouvelle liste",
+    "share-button-caption": "Partager",
+    "contact-mail-address": "Adresse mail du contact",
+    "share-success-modal-content": "Partagé avec succés !",
+    "share-fail-modal-content": "Une erreur est survenue lors de la tentative de partage. Il se peut que l'adresse mail ne pointe pas vers une personne inscrite."
 }
