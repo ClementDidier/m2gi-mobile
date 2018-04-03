@@ -24,7 +24,8 @@ export class LoggerProvider {
 
     private userProfile: firebase.User;
     public displayName: string;
-
+    public email: string;
+    
     constructor(private fireauth: AngularFireAuth,
         private googlePlus: GooglePlus,
         public events: Events,
@@ -33,10 +34,12 @@ export class LoggerProvider {
             if (res && res.uid) {
                 this.userProfile = res;
                 this.displayName = res.displayName ? res.displayName : res.email;
+                this.email = res.email;
                 this.events.publish('user:connected', this.userProfile);
             } else {
                 this.userProfile = null;
                 this.displayName = null;
+                this.email = null;
                 this.events.publish('user:disconnected');
             }
         });

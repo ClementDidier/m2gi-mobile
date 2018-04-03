@@ -14,6 +14,7 @@ export class SharePage {
 
     private list: TodoList;
     private mailAddress: string;
+    private users: any;
 
     constructor(public navCtrl: NavController, public todo: TodoProvider, public alertCtrl: AlertController, public navParams: NavParams, private logger: LoggerProvider, private translate: TranslateService) {
         this.list = this.navParams.get('list');
@@ -29,19 +30,23 @@ export class SharePage {
             this.navCtrl.setRoot(LoginPage);
     }
 
-    private share(): void {
-        if(this.mailAddress && this.list) {
-            //this.notify()
-            this.todo.getUsersEmail().then((emails) => {
-                var users = emails.filter(email => email == this.mailAddress);
-                if(users && users.length > 0) {
-                    // TODO: Ajout de la liste pour l'autre utilisateur 
-                    this.notify(true); // Notifie l'utilisateur que le partage est OK
-                } else {
-                    this.notify(false); // notifie l'utilisateur que le partage n'est pas OK
-                }
+    private share(user): void {
+        this.todo.addListUUIDToUser(user.id, this.list.uuid);
+        this.notify(true); // Notifie l'utilisateur que le partage est OK
+    }
+
+    private onInput(event) : void {
+        var myEmail;
+        this.todo.getUsers().then((users) => {
+            console.log(this.mailAddress, users);
+            var reg = new RegExp(this.mailAddress);
+            var usr = [];
+            users.forEach(u => {
+                if(reg.test(u.email) && this.logger.email !== u.email)
+                    usr.push(u);
             });
-        }
+            this.users = usr;
+        });
     }
 
     private notify(isSuccess): void {
@@ -51,7 +56,7 @@ export class SharePage {
             buttons: [
                 {
                     text: this.translate.instant('valid-button-caption'),
-                    role: 'cancel'
+                    handler: () => { this.navCtrl.pop(); }
                 }
             ]
         }).present();
