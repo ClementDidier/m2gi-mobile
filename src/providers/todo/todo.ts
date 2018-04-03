@@ -293,7 +293,7 @@ export class TodoProvider {
 	/**
 	 * Ajout une nouvelle liste à l'utilisateur
 	 * @param userId L'identifiant de l'utilisateur
-	 * @param listUUID L'identifiant de la liste 
+	 * @param listUUID L'identifiant de la liste
 	 */
 	addListUUIDToUser(userId, listUUID): any {
 		return this.firedatabase.list(`/users/${userId}/lists`).push(`${listUUID}`);
@@ -323,12 +323,18 @@ export class TodoProvider {
 		var newuuid = uuid();
 		this.getListIdByUid(listUuid).then((listid) => {
 			var newTodo = this.firedatabase.list(`/lists/${listid}/items`).push('{}');
+			var imguuid = uuid();
 			newTodo.set({
 				uuid: newuuid,
 				name: itemName.toString(),
 				complete: completed,
 				desc: description.toString(),
-				img : img
+				img : imguuid
+			});
+			var newImgTodo = this.firedatabase.list(`/assets`).push('{}');
+			newImgTodo.set({
+				uuid : imguuid,
+				data : img
 			});
 			varthis.getListByUid(listUuid).then((val) => {
 				let list = varthis.data.find(d => d.uuid == val.uuid);
