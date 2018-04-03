@@ -339,4 +339,19 @@ export class TodoProvider {
 			});
 		});
 	}
+
+	public getImageData(imguuid): Promise<string> {
+		return new Promise((resolve, reject) => {
+			var ref = this.firedatabase.database.ref(`/assets/`);
+			ref.once('value').then((snap) => {
+				var list = snap.val();
+				for (var asset in list) {
+					if(list[asset].uuid == imguuid) {
+						resolve(list[asset].data);
+					}
+				}
+				reject();
+			});
+		});
+	}
 }

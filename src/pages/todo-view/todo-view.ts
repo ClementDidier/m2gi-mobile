@@ -14,10 +14,16 @@ export class TodoViewPage {
 
 	public item: any;
 
-	constructor(private translate: TranslateService, private logger: LoggerProvider, private totoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
+	constructor(private translate: TranslateService, private logger: LoggerProvider, private todoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
 		var todo = this.navParams.get('todo');
-		this.item = { name: todo.name || "???", desc: todo.desc || "", img : todo.img || ''};
-    console.log (todo.img);
+		this.item = { name: todo.name || "???", desc: todo.desc || "" };
+		if(todo.img) {
+			this.todoProvider.getImageData(todo.img).then((data) => {
+				this.item.img = data;
+			}).catch(() => {
+				this.item.img = '';
+			});
+		}
 	}
 
 	ionViewDidLoad() {
