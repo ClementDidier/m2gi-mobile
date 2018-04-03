@@ -85,7 +85,9 @@ export class ListPage {
                 {
                     text: this.translate.instant('valid-button-caption'),
                     handler: () => {
-                        this.todoService.deleteTodo(listId, todoId);
+                        this.todoService.deleteTodo(listId, todoId).subscribe(todoItems => {
+                            this.list.items = todoItems;
+                        });
                     }
                 }
             ]

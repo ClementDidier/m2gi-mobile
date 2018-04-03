@@ -224,17 +224,17 @@ export class TodoProvider {
 		});
 	}
 
-	public deleteTodo(listUuid: string, todouid: string): void {
+	public deleteTodo(listUuid: string, todouid: string): Observable<any> {
 		var varthis = this;
 		var todoId;
 		this.getTodoIdByUid(listUuid, todouid).then((itemid) => {
 			varthis.getListIdByUid(listUuid).then((listid) => {
 				var baseitem = varthis.firedatabase.list(`/lists/${listid}/items/${itemid}`);
 				baseitem.remove();
-				varthis.getTodos(listUuid);
+				return varthis.getTodos(listUuid);
 			});
 		});
-
+		return varthis.getTodos(listUuid);
 		/*
 		let items = this.data.find(d => d.uuid == listUuid).items;
 		let index = items.findIndex(value => value.uuid == uid);
@@ -328,8 +328,5 @@ export class TodoProvider {
 				}
 			});
 		});
-
-		let list = this.data.find(d => d.uuid == listUuid);
-		let index = this.data.findIndex(value => value.uuid === listUuid);
 	}
 }
