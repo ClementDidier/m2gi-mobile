@@ -27,16 +27,18 @@ export class TodoProvider {
 		// nothing
 	}
 
-	public getUsersEmail(): Promise<string[]> {
+	public getUsers(): Promise<any[]> {
 		return new Promise((resolve, reject) => {
 			var users = [];
 			var url = '/users/';
 			var ref = this.firedatabase.database.ref(url);
 			ref.once('value', (list) => {
-				var usrs = list.val();
-				usrs.forEach(u => {
-					users.push(u.email || 'private@address.com');
-				});
+				var ll = list.val();
+				if (ll) {
+					for (var id in ll) {
+						users.push({ id: id, email: ll[id].email || 'unknow@unknow.com'});
+					}
+				}
 				resolve(users);
 			});
 		});
@@ -55,7 +57,6 @@ export class TodoProvider {
 			if (listsId) {
 				for (var id in listsId) {
 					this.getListByUid(listsId[id]).then((val) => {
-						console.log('getListsOfUser', val);
 						lists.push(val);
 					});
 				}
@@ -277,7 +278,7 @@ export class TodoProvider {
 					items: []
 				}
 			);
-			var newListForUser = this.firedatabase.list(`/users/${userId}/lists`).push(`${newuuid}`);
+			var newListForUser = this.addListUUIDToUser(userId, newuuid);
 			var vardata = this.data;
 			this.getListByUid(newuuid).then((val) => {
 				vardata.push(val);
@@ -287,6 +288,15 @@ export class TodoProvider {
 		});
 
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
+	}
+
+	/**
+	 * Ajout une nouvelle liste à l'utilisateur
+	 * @param userId L'identifiant de l'utilisateur
+	 * @param listUUID L'identifiant de la liste 
+	 */
+	addListUUIDToUser(userId, listUUID): any {
+		return this.firedatabase.list(`/users/${userId}/lists`).push(`${listUUID}`);
 	}
 
 	getNewListIndex(): Promise<number> {
