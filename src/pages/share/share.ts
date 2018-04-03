@@ -38,7 +38,6 @@ export class SharePage {
     private onInput(event) : void {
         var myEmail;
         this.todo.getUsers().then((users) => {
-            console.log(this.mailAddress, users);
             var reg = new RegExp(this.mailAddress);
             var usr = [];
             users.forEach(u => {
