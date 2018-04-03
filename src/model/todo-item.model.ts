@@ -3,4 +3,5 @@ export interface TodoItem {
     name : string;
     desc? : string;
     complete : boolean;
+    img? : string;
 }

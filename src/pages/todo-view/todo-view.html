@@ -9,7 +9,7 @@
       <ion-card-header>
           <ion-label>
               <ion-icon name="list-box" item-start>
-              {{ item?.name }}
+              {{ item.name }}
               </ion-icon>
           </ion-label>
       </ion-card-header>
@@ -18,6 +18,7 @@
           <ion-label id="desc-lbl" floating>{{ 'task-desc-label-caption' | translate }}</ion-label>
           <ion-label margin-top="5px">{{ item.desc }}</ion-label>
         </ion-item>
+        <img [src]="item.img" *ngIf="item.img != ''" />
         <ion-buttons end>
           <button ion-button color="light" (click)='returnPrecPage()'>
               <ion-icon name="return-left">

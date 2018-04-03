@@ -265,7 +265,7 @@ export class TodoProvider {
 	 * @param userId L'identifiant de l'utilisateur propriétaire
 	 */
 	public addList(name: string, userId: string): void {
-		
+
 		var newList = this.firedatabase.list('/lists').push('{}');
 		this.getNewListIndex().then((i) => {
 			console.log('index', i);
@@ -286,7 +286,7 @@ export class TodoProvider {
 		}).catch((error) => {
 			console.error(error);
 		});
-		
+
 		//console.log(this.http.post( FIREBASE_CREDENTIALS.databaseURL + this.fireauth.auth.currentUser.uid,'{ uuid : '+ uuid() + ', name :' + name.toString() + ', items : []}'));
 	}
 
@@ -316,8 +316,9 @@ export class TodoProvider {
 	 * @param itemName Le nom de la tâche
 	 * @param completed L'état de completude de la tâche
 	 * @param description La description de la tâche
+	 * @param img Image du todo
 	 */
-	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String): void {
+	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String, img : string): void {
 		var varthis = this;
 		var newuuid = uuid();
 		this.getListIdByUid(listUuid).then((listid) => {
@@ -327,6 +328,7 @@ export class TodoProvider {
 				name: itemName.toString(),
 				complete: completed,
 				desc: description.toString(),
+				img : img
 			});
 			varthis.getListByUid(listUuid).then((val) => {
 				let list = varthis.data.find(d => d.uuid == val.uuid);
