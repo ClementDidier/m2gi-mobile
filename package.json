@@ -20,6 +20,7 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
+    "@ionic-native/camera": "^4.6.0",
     "@ionic-native/core": "^4.6.0",
     "@ionic-native/firebase": "^4.5.2",
     "@ionic-native/geolocation": "^4.6.0",
@@ -32,8 +33,10 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "angularfire2": "^5.0.0-rc.4",
     "cordova": "^8.0.0",
+    "cordova-android": "7.0.0",
     "cordova-browser": "5.0.3",
     "cordova-lib": "^8.0.0",
+    "cordova-plugin-camera": "^4.0.2",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-geolocation": "^4.0.1",
@@ -72,7 +75,8 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-googleplus": {},
       "cordova-plugin-nativegeocoder": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "browser"

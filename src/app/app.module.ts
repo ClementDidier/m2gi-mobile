@@ -28,7 +28,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { TodoFormPage } from '../pages/todo-form/todo-form';
 import { TodoViewPage } from '../pages/todo-view/todo-view';
 import { SharePage } from '../pages/share/share';
-
+import { Camera } from '@ionic-native/camera';
 @NgModule({
     declarations: [
         MyApp,
@@ -82,7 +82,8 @@ import { SharePage } from '../pages/share/share';
         AlertController,
         LoggerProvider,
         Geolocation,
-        NativeGeocoder
+        NativeGeocoder,
+        Camera
     ]
 })
 

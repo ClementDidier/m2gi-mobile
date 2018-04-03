@@ -16,7 +16,8 @@ export class TodoViewPage {
 
 	constructor(private translate: TranslateService, private logger: LoggerProvider, private totoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
 		var todo = this.navParams.get('todo');
-		this.item = { name: todo.name || "???", desc: todo.desc || "" };
+		this.item = { name: todo.name || "???", desc: todo.desc || "", img : todo.img || ''};
+    console.log (todo.img);
 	}
 
 	ionViewDidLoad() {

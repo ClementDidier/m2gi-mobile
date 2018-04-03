@@ -28,6 +28,7 @@
     "task-desc-label-caption": "Description de la tâche",
     "editing-element-modal-title": "Modifier l'élément",
     "editing-element-modal-content": "Modifiez les informations de l'élément de la liste",
+    "add-picture" : "Ajoutez une photo",
 
     "fr": "Français",
     "gb": "Anglais",
@@ -42,7 +43,7 @@
     "home-tab-caption": "Accueil",
     "about-tab-caption": "À propos",
     "profil-tab-caption": "Profil",
-    
+
     "forgotten-password-label-caption": "Mot de passe oublié ?",
     "reset-error-modal-title": "Erreur tentative",
     "reset-error-modal-content": "Une erreur est survenue. Détails : ",
