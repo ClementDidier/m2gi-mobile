@@ -16,7 +16,7 @@ export class TodoViewPage {
 
 	constructor(private translate: TranslateService, private logger: LoggerProvider, private todoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) {
 		var todo = this.navParams.get('todo');
-		this.item = { name: todo.name || "???", desc: todo.desc || "" };
+		this.item = { name: todo.name || "???", desc: todo.desc || "", img: '' };
 		if(todo.img) {
 			this.todoProvider.getImageData(todo.img).then((data) => {
 				this.item.img = data;
