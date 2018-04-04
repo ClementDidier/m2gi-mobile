@@ -11,6 +11,14 @@ Ionic pages and navigation.
 </ion-header>
 
 <ion-content padding style="background: url(assets/imgs/bglogin.jpg) center; background-size: cover;">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
     <ion-card>
         <ion-card-header>
             <ion-label>
@@ -19,27 +27,28 @@ Ionic pages and navigation.
                 </ion-icon>
             </ion-label>
         </ion-card-header>
+
         <ion-list>
-            <ion-item-group (ionItemReorder)="reorderItems($event)"> <!-- reorder="true" -->
-                <ion-item-sliding *ngFor='let todo of list.items'>
-                    <ion-item>
-                        <todo-item item-content [todo]='todo' [listuid]='list.uuid'></todo-item>
-                    </ion-item>
-                    <ion-item-options side='left'>
-                        <button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger">
-                            <ion-icon name="close"></ion-icon>{{ 'remove-button-caption' | translate }}
-                        </button>
-                        <button ion-button (click)='editItem(todo)' color="secondary">
-                            <ion-icon name="pricetag"></ion-icon>{{ 'edit-button-caption' | translate }}
-                        </button>
-                    </ion-item-options>
-                    <ion-item-options side='right'>
-                        <button ion-button (click)='geolocate(todo)'>
-                            <ion-icon name="locate"></ion-icon>{{ 'geoloc-button-caption' | translate }}
-                        </button>
-                    </ion-item-options>
-                </ion-item-sliding>
-            </ion-item-group>
+          <ion-item-group (ionItemReorder)="reorderItems($event)"> <!-- reorder="true" -->
+              <ion-item-sliding *ngFor='let todo of list.items'>
+                  <ion-item>
+                      <todo-item item-content [todo]='todo' [listuid]='list.uuid'></todo-item>
+                  </ion-item>
+                  <ion-item-options side='left'>
+                      <button ion-button (click)='deleteItem(list.uuid, todo.uuid)' color="danger">
+                          <ion-icon name="close"></ion-icon>{{ 'remove-button-caption' | translate }}
+                      </button>
+                      <button ion-button (click)='editItem(todo)' color="secondary">
+                          <ion-icon name="pricetag"></ion-icon>{{ 'edit-button-caption' | translate }}
+                      </button>
+                  </ion-item-options>
+                  <ion-item-options side='right'>
+                      <button ion-button (click)='geolocate(todo)'>
+                          <ion-icon name="locate"></ion-icon>{{ 'geoloc-button-caption' | translate }}
+                      </button>
+                  </ion-item-options>
+              </ion-item-sliding>
+          </ion-item-group>
         </ion-list>
 
         <ion-buttons end>

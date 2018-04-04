@@ -155,4 +155,10 @@ export class ListPage {
         this.list.items = reorderArray(this.list.items, indexes);
         // TODO: Save in database reorder
     }
+    private doRefresh(event){
+      this.todoService.getTodos(this.list.uuid).subscribe(todoItems => {
+          this.list.items = todoItems;
+          event.complete();
+      });
+    }
 }
