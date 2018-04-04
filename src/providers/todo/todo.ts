@@ -325,10 +325,10 @@ export class TodoProvider {
 			var newTodo = this.firedatabase.list(`/lists/${listid}/items`).push('{}');
 			var imguuid;
 			if (img != ''){
-				imguuid= uuid()
+				imguuid= uuid();
 			}
 			else{
-				imguuid = ''
+				imguuid = '';
 			}
 			newTodo.set({
 				uuid: newuuid,
