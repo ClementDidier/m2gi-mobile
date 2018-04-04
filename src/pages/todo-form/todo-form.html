@@ -22,19 +22,22 @@
           <ion-label floating>{{ 'task-desc-label-caption' | translate }}</ion-label>
           <ion-input highlight-color="balanced" type="text" [(ngModel)]="taskdesc"></ion-input>
         </ion-item>
-        <img [src]="taskimg" *ngIf="taskimg != ''" />
         <button ion-button color="light" (click)='addImg()'>
           <ion-icon name="ios-camera">
             {{ 'add-picture' | translate }}
           </ion-icon>
         </button>
-        <ion-label *ngIf="geo != null" floating>Longitude : {{ geo.longitude }}, latitude : {{ geo.latitude }}</ion-label>
+        <img [src]="taskimg" *ngIf="taskimg != ''" />
+        <button ion-button  *ngIf="taskimg != ''" color="danger" (click)='rmImg()'>
+            <ion-icon name="close">{{ 'remove-button-caption' | translate }}</ion-icon>
+        </button>
         <button ion-button (click)='addGeo()'>
           <ion-icon name="compass">
             {{ 'add-geo' | translate }}
           </ion-icon>
         </button>
-        <button ion-button  *ngIf="taskimg != ''" color="danger" (click)='rmImg()'>
+        <ion-label *ngIf="geo != null" floating>Longitude : {{ geo.longitude }}, latitude : {{ geo.latitude }}</ion-label>
+        <button ion-button  *ngIf="geo != null" color="danger" (click)='rmGeo()'>
             <ion-icon name="close">{{ 'remove-button-caption' | translate }}</ion-icon>
         </button>
         <ion-buttons end>

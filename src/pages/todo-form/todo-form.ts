@@ -47,6 +47,10 @@ export class TodoFormPage {
 		});
 	}
 
+	rmGeo() {
+		this.geo = null;
+	}
+
 	addImg() {
 		this.camera.getPicture(this.camOptions).then((imageData) => {
 			// imageData is either a base64 encoded string or a file URI
