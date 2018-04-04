@@ -4,4 +4,5 @@ export interface TodoItem {
     desc? : string;
     complete : boolean;
     img? : string;
+    position?: any;
 }

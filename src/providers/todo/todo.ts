@@ -318,7 +318,7 @@ export class TodoProvider {
 	 * @param description La description de la tâche
 	 * @param img Image du todo
 	 */
-	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String, img : string): void {
+	public addTodo(listUuid: string, itemName: String, completed: boolean, description: String, img : string, position: any): void {
 		var varthis = this;
 		var newuuid = uuid();
 		this.getListIdByUid(listUuid).then((listid) => {
@@ -329,7 +329,8 @@ export class TodoProvider {
 				name: itemName.toString(),
 				complete: completed,
 				desc: description.toString(),
-				img : imguuid
+				img : imguuid,
+				position: position
 			});
 			var newImgTodo = this.firedatabase.list(`/assets`).push('{}');
 			newImgTodo.set({

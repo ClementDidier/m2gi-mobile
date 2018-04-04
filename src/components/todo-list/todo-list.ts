@@ -78,15 +78,15 @@ export class TodoListComponent {
      */
     private confirmListDeletion(listUuid) {
         let alert = this.alertCtrl.create({
-            title: 'Confirmation de suppression',
-            message: 'Êtes-vous sûr de supprimer la liste ?',
+            title: this.translate.instant('removing-confirmation-modal-title'),
+            message:this.translate.instant('removing-confirmation-modal-content'),
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translate.instant('cancel-button-caption'),
                     role: 'cancel'
                 },
                 {
-                    text: 'Valider',
+                    text: this.translate.instant('valid-button-caption'),
                     handler: () => {
                         this.todoService.deleteList(listUuid);
                     }
@@ -121,8 +121,8 @@ export class TodoListComponent {
      */
     private editList(list : TodoList) {
         this.alertCtrl.create({
-            title: 'Editer une liste',
-            message: 'Entrez un autre nom pour cette liste :',
+            title: this.translate.instant('editing-element-modal-title'),
+            message: this.translate.instant('edit-list-name-modal-content'),
             inputs: [
                 {
                     name: 'listname',
@@ -132,11 +132,11 @@ export class TodoListComponent {
             ] ,
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translate.instant('cancel-button-caption'),
                     role: 'cancel'
                 },
                 {
-                    text: 'Valider',
+                    text: this.translate.instant('valid-button-caption'),
                     handler: (data) => {
                         this.todoService.editList(list.uuid, data.listname);
                     }

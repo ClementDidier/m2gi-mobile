@@ -28,6 +28,8 @@
     "task-desc-label-caption": "Task's description",
     "editing-element-modal-content": "Edit information of the element in the list",
     "add-picture" : "Add a picture",
+    "add-geo": "Add your geolocation",
+    "edit-list-name-modal-content": "Enter a new list name",
 
 
     "fr": "French",

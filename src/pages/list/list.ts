@@ -52,7 +52,6 @@ export class ListPage {
     }
 
     private ionViewDidLoad() {
-        this.geolocate(null);
         if (!this.logger.isLogged())
             this.navCtrl.setRoot(LoginPage);
     }
@@ -138,7 +137,7 @@ export class ListPage {
      * Géolocalise l'utilisateur et fournit les informations textuelles correspondantes à la tâche spécifiée
      * @param todo La tâche prenant en charge les informations textuelles de géolocalisation
      */
-    private geolocate(todo: TodoItem) {
+    /*private geolocate(todo: TodoItem) {
         console.log('geoloc');
         this.geolocation.getCurrentPosition().then((resp) => {
             console.log(resp);
@@ -148,7 +147,7 @@ export class ListPage {
         }).catch((error: any) => {
             console.log('geolocate error:', error);
         });
-    }
+    }*/
 
     private reorderItems(indexes): void {
         console.log("pages.list.reorderItems", indexes);
