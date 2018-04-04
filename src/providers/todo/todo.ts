@@ -323,7 +323,13 @@ export class TodoProvider {
 		var newuuid = uuid();
 		this.getListIdByUid(listUuid).then((listid) => {
 			var newTodo = this.firedatabase.list(`/lists/${listid}/items`).push('{}');
-			var imguuid = uuid();
+			var imguuid;
+			if (img != ''){
+				imguuid= uuid()
+			}
+			else{
+				imguuid = ''
+			}
 			newTodo.set({
 				uuid: newuuid,
 				name: itemName.toString(),
@@ -331,11 +337,13 @@ export class TodoProvider {
 				desc: description.toString(),
 				img : imguuid
 			});
-			var newImgTodo = this.firedatabase.list(`/assets`).push('{}');
-			newImgTodo.set({
-				uuid : imguuid,
-				data : img
-			});
+			if (img != ''){
+				var newImgTodo = this.firedatabase.list(`/assets`).push('{}');
+				newImgTodo.set({
+					uuid : imguuid,
+					data : img
+				});
+			}
 			varthis.getListByUid(listUuid).then((val) => {
 				let list = varthis.data.find(d => d.uuid == val.uuid);
 				let index = varthis.data.findIndex(value => value.uuid === listUuid);
