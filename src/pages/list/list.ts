@@ -118,12 +118,6 @@ export class ListPage {
                     name: 'desc',
                     value : item.desc || ""
                 },
-                {
-                    name: 'completed',
-                    label: 'Is completed ?',
-                    type: 'checkbox',
-                    checked : item.complete
-                }
             ] ,
             buttons: [
                 {
@@ -133,7 +127,7 @@ export class ListPage {
                 {
                     text: this.translate.instant('valid-button-caption'),
                     handler: (data) => {
-                        this.todoService.editTodo(this.list.uuid, {uuid : item.uuid, name: data.name, desc : data.desc, complete : data.completed });
+                        this.todoService.editTodo(this.list.uuid, {uuid : item.uuid, name: data.name, desc : data.desc, complete : item.complete });
                     }
                 }
             ]
