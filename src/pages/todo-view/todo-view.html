@@ -19,6 +19,7 @@
           <ion-label margin-top="5px">{{ item.desc }}</ion-label>
         </ion-item>
         <img [src]="item.img" *ngIf="item.img != ''" />
+        <ion-label *ngIf="item.position" floating>Longitude : {{ item.position.longitude }}, latitude : {{ item.position.latitude }}</ion-label>
         <ion-buttons end>
           <button ion-button color="light" (click)='returnPrecPage()'>
               <ion-icon name="return-left">

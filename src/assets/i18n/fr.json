@@ -29,6 +29,8 @@
     "editing-element-modal-title": "Modifier l'élément",
     "editing-element-modal-content": "Modifiez les informations de l'élément de la liste",
     "add-picture" : "Ajoutez une photo",
+    "add-geo": "Ajouter votre geolocalisation",
+    "edit-list-name-modal-content": "Entrez un autre nom pour cette liste",
 
     "fr": "Français",
     "gb": "Anglais",
