@@ -98,7 +98,7 @@ export class TodoProvider {
 							snap[list]['items'] = [];
 						}
 						else {
-							snap[list]['items'] = Object.keys(snap[list]['items']).map(function (itemindex) {
+							snap[list]['items'] = Object.keys(snap[list]['items']).map((itemindex) => {
 								let item = snap[list]['items'][itemindex];
 								return item;
 							});
@@ -215,7 +215,6 @@ export class TodoProvider {
 
 	public swapListsIndexes(list1: TodoList, list2: TodoList): void {
 		var baseitem = this.firedatabase.list(`/lists/`);
-		var lid1, lid2;
 		Promise.all([this.getListIdByUid(list1.uuid), this.getListIdByUid(list2.uuid)]).then(([lid1, lid2]) => {
 			var index = list1.index;
 			baseitem.update(lid1, { 'index': list2.index });

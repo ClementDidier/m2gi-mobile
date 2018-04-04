@@ -152,7 +152,6 @@ export class TodoListComponent {
 
         var list1 = this.items[indexes.from];
         var list2 = this.items[indexes.to];
-        
         this.todoService.swapListsIndexes(list1, list2);
     }
 }

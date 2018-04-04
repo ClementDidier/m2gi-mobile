@@ -18,21 +18,21 @@ export class TodoFormPage {
 	private taskdesc: string;
 	private taskimg: string;
 	private geo: any;
-
+private camOptions: CameraOptions;
 	constructor(private translate: TranslateService, private geoloc: Geolocation, private logger: LoggerProvider, private totoProvider: TodoProvider, public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private camera: Camera) {
 		this.listUID = this.navParams.get('uid');
 		this.taskimg = '';
 		this.geo = null;
-	}
+    this.camOptions = {
+  		quality: 100,
+  		destinationType: camera.DestinationType.DATA_URL,
+  		encodingType: camera.EncodingType.JPEG,
+  		mediaType: camera.MediaType.PICTURE,
+  		targetWidth: 700,
+  		targetHeight: 700,
+  	};
 
-	private camOptions: CameraOptions = {
-		quality: 100,
-		destinationType: this.camera.DestinationType.DATA_URL,
-		encodingType: this.camera.EncodingType.JPEG,
-		mediaType: this.camera.MediaType.PICTURE,
-		targetWidth: 700,
-		targetHeight: 700,
-	};
+	}
 
 	ionViewDidLoad() {
 		// nothing
@@ -43,7 +43,6 @@ export class TodoFormPage {
 			this.geo = { longitude: '', latitude: '' };
 			this.geo.longitude = position.coords.longitude;
 			this.geo.latitude = position.coords.latitude;
-			console.log(this.geo);
 		});
 	}
 

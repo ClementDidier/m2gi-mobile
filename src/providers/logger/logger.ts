@@ -25,7 +25,7 @@ export class LoggerProvider {
     private userProfile: firebase.User;
     public displayName: string;
     public email: string;
-    
+
     constructor(private fireauth: AngularFireAuth,
         private googlePlus: GooglePlus,
         public events: Events,

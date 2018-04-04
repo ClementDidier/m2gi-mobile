@@ -25,7 +25,7 @@
 		"no-duplicate-variable": true,
 		"no-use-before-declare": true,
 		"no-var-keyword": false,
-		"no-for-in-array": true,
+		"no-for-in-array": false,
 		"no-angle-bracket-type-assertion": true,
 		"no-var-requires": false,
 		"class-name": true,

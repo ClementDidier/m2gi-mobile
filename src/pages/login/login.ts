@@ -90,6 +90,6 @@ export class LoginPage {
                     buttons: ['OK']
                 }).present();
             });
-        } 
+        }
     }
 }
