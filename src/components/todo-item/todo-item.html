@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-          <ion-checkbox item-left checked={{todo.complete}}></ion-checkbox>
+          <ion-checkbox item-left checked={{todo.complete}} (ionChange)="checkItem(complete);" ></ion-checkbox>
       </ion-col>
       <ion-col col-auto (click)="showTask()">
           <h2>{{ todo.name }}</h2>

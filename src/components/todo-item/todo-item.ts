@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TodoItem } from '../../model/todo-item.model';
 import { NavController } from 'ionic-angular';
 import { TodoViewPage } from '../../pages/todo-view/todo-view';
+import { TodoProvider } from '../../providers/todo/todo';
 
 /**
 * Generated class for the TodoItemComponent component.
@@ -18,10 +19,17 @@ export class TodoItemComponent {
     @Input()
     public todo: TodoItem;
 
-    constructor(private navCtrl: NavController) {
+    @Input()
+    public listuid: string;
+
+    constructor(private navCtrl: NavController, public todoService: TodoProvider) {
         // nothing
     }
 
+    public checkItem(): void{
+      this.todo.complete = !this.todo.complete;
+      this.todoService.editTodo(this.listuid, this.todo);
+    }
     public showTask(): void {
         this.navCtrl.push(TodoViewPage, { todo: this.todo });
     }
